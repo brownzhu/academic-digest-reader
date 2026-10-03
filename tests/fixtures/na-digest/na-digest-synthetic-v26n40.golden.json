@@ -1,0 +1,27 @@
+{
+  "newsletterName": "NA Digest",
+  "volume": "26",
+  "issue": "40",
+  "publicationDate": "2026-10-02",
+  "editor": "Editor Example",
+  "itemCount": 17,
+  "titles": [
+    "Open problems in numerical analysis and human understanding",
+    "Announcing the release of the NUMA 1.0 Library",
+    "PDE Lab: inspect PDE discretizations in a browser",
+    "New Book: Optimization in Constrained Markets",
+    "Call for submissions: Applied Mathematics Annual Meeting 2027",
+    "Mathematics and Image Analysis Conference 2027",
+    "Call for Applications: Numerical PDE Summer School 2027",
+    "PhD position in scientific computing",
+    "Postdoc: SciML and Numerical Weather Prediction",
+    "Postdoc positions in Computational Modeling",
+    "Postdoctoral Position: Scientific Computing Fellowship",
+    "Tenure Track Position in Applied Mathematics",
+    "Tenure-track Assistant Professor in Inverse Problems",
+    "Contents, Applied Mathematics New Volume: AMJ Vol. 9",
+    "Contents, Computational Science New Volume: CSJ Vol. 26",
+    "Contents, Mathematical Foundations New Volume: MFJ Vol. 10",
+    "Call for papers: Fast Integral Equations special issue"
+  ]
+}

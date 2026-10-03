@@ -1,0 +1,2598 @@
+{
+  "schemaVersion": 1,
+  "parserId": "na-digest",
+  "parserVersion": "0.2.0",
+  "source": "gmail-copy",
+  "newsletterName": "NA Digest",
+  "volume": "26",
+  "issue": "40",
+  "publicationDate": {
+    "raw": "Friday, October 02, 2026",
+    "iso": "2026-10-02"
+  },
+  "editor": "Editor Example",
+  "originalSubject": null,
+  "topics": [
+    "Open problems in numerical analysis and human understanding",
+    "Announcing the release of the NUMA 1.0 Library",
+    "PDE Lab: inspect PDE discretizations in a browser",
+    "New Book: Optimization in Constrained Markets",
+    "Call for submissions: Applied Mathematics Annual Meeting 2027",
+    "Mathematics and Image Analysis Conference 2027",
+    "Call for Applications: Numerical PDE Summer School 2027",
+    "PhD position in scientific computing",
+    "Postdoc: SciML and Numerical Weather Prediction",
+    "Postdoc positions in Computational Modeling",
+    "Postdoctoral Position: Scientific Computing Fellowship",
+    "Tenure Track Position in Applied Mathematics",
+    "Tenure-track Assistant Professor in Inverse Problems",
+    "Contents, Applied Mathematics New Volume: AMJ Vol. 9",
+    "Contents, Computational Science New Volume: CSJ Vol. 26",
+    "Contents, Mathematical Foundations New Volume: MFJ Vol. 10",
+    "Call for papers: Fast Integral Equations special issue"
+  ],
+  "items": [
+    {
+      "id": "na-26-40-1-933ccebc",
+      "originalIndex": 0,
+      "title": "Open problems in numerical analysis and human understanding",
+      "category": "Research / Open Problem",
+      "sender": "Researcher One",
+      "senderEmail": "researcher1@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 1272,
+          "end": 1288,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [
+        {
+          "raw": "January 1, 2027",
+          "iso": "2027-01-01",
+          "kind": "other-deadline",
+          "evidence": {
+            "field": "dates[0]",
+            "ruleId": "date.deadline.other-deadline",
+            "sourceText": "January 1, 2027",
+            "start": 75,
+            "end": 90,
+            "confidence": "high"
+          }
+        }
+      ],
+      "deadline": {
+        "raw": "January 1, 2027",
+        "iso": "2027-01-01",
+        "kind": "other-deadline",
+        "evidence": {
+          "field": "dates[0]",
+          "ruleId": "date.deadline.other-deadline",
+          "sourceText": "January 1, 2027",
+          "start": 75,
+          "end": 90,
+          "confidence": "high"
+        }
+      },
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "numerical analysis"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/open-problems",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/open-problems",
+            "start": 92,
+            "end": 125,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "This research note presents open problems in numerical analysis.\nDeadline: January 1, 2027.\nhttps://example.org/open-problems",
+      "relevance": {
+        "score": 8,
+        "matches": [
+          {
+            "keyword": "numerical analysis",
+            "weight": 4,
+            "occurrences": 2,
+            "evidence": [
+              {
+                "field": "relevance.matches.numerical analysis[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "numerical analysis",
+                "start": 17,
+                "end": 35,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.numerical analysis[1]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "numerical analysis",
+                "start": 105,
+                "end": 123,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Open problems in numerical analysis and human understanding",
+          "start": 1298,
+          "end": 1357,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.open-problem",
+          "sourceText": "Open problems",
+          "start": 0,
+          "end": 13,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "researcher1@example.org",
+          "start": 1241,
+          "end": 1264,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Researcher One <researcher1@example.org>",
+          "start": 1225,
+          "end": 1265,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 1272,
+          "end": 1288,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "This research note presents open problems in numerical analysis.\nDeadline: January 1, 2027.\nhttps://example.org/open-problems",
+          "start": 1359,
+          "end": 1484,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-2-459e098c",
+      "originalIndex": 1,
+      "title": "Announcing the release of the NUMA 1.0 Library",
+      "category": "Software",
+      "sender": "Developer Two",
+      "senderEmail": "developer2@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 1594,
+          "end": 1610,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [],
+      "deadline": null,
+      "salary": null,
+      "funding": null,
+      "tags": [],
+      "urls": [
+        {
+          "url": "https://example.org/numa",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/numa",
+            "start": 79,
+            "end": 103,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "NUMA 1.0 is a deterministic numerical software library release.\nDocumentation: https://example.org/numa",
+      "relevance": {
+        "score": 0,
+        "matches": []
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Announcing the release of the NUMA 1.0 Library",
+          "start": 1620,
+          "end": 1666,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.software",
+          "sourceText": "release of the NUMA 1.0 Library",
+          "start": 15,
+          "end": 46,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "developer2@example.org",
+          "start": 1564,
+          "end": 1586,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Developer Two <developer2@example.org>",
+          "start": 1549,
+          "end": 1587,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 1594,
+          "end": 1610,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "NUMA 1.0 is a deterministic numerical software library release.\nDocumentation: https://example.org/numa",
+          "start": 1668,
+          "end": 1771,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-3-f850b65f",
+      "originalIndex": 2,
+      "title": "PDE Lab: inspect PDE discretizations in a browser",
+      "category": "Software",
+      "sender": "Developer Three",
+      "senderEmail": "developer3@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 1883,
+          "end": 1899,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [],
+      "deadline": null,
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "PDE"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/pde-lab",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/pde-lab",
+            "start": 102,
+            "end": 129,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "PDE Lab is software for inspecting finite-element and finite-difference\ndiscretizations in a browser.\nhttps://example.org/pde-lab",
+      "relevance": {
+        "score": 16,
+        "matches": [
+          {
+            "keyword": "PDE",
+            "weight": 4,
+            "occurrences": 4,
+            "evidence": [
+              {
+                "field": "relevance.matches.PDE[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "PDE",
+                "start": 0,
+                "end": 3,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.PDE[1]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "PDE",
+                "start": 17,
+                "end": 20,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.PDE[2]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "PDE",
+                "start": 50,
+                "end": 53,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.PDE[3]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "pde",
+                "start": 172,
+                "end": 175,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "PDE Lab: inspect PDE discretizations in a browser",
+          "start": 1909,
+          "end": 1958,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.software",
+          "sourceText": "inspect PDE discretizations in a browser",
+          "start": 9,
+          "end": 49,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "developer3@example.org",
+          "start": 1853,
+          "end": 1875,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Developer Three <developer3@example.org>",
+          "start": 1836,
+          "end": 1876,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 1883,
+          "end": 1899,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "PDE Lab is software for inspecting finite-element and finite-difference\ndiscretizations in a browser.\nhttps://example.org/pde-lab",
+          "start": 1960,
+          "end": 2089,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-4-a482ad31",
+      "originalIndex": 3,
+      "title": "New Book: Optimization in Constrained Markets",
+      "category": "Book",
+      "sender": "Author Four",
+      "senderEmail": "author4@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 2194,
+          "end": 2210,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [],
+      "deadline": null,
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "optimization"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/books/constrained-markets",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/books/constrained-markets",
+            "start": 73,
+            "end": 118,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "This new book develops mathematical models for constrained optimization.\nhttps://example.org/books/constrained-markets",
+      "relevance": {
+        "score": 6,
+        "matches": [
+          {
+            "keyword": "optimization",
+            "weight": 3,
+            "occurrences": 2,
+            "evidence": [
+              {
+                "field": "relevance.matches.optimization[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "Optimization",
+                "start": 10,
+                "end": 22,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.optimization[1]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "optimization",
+                "start": 105,
+                "end": 117,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "New Book: Optimization in Constrained Markets",
+          "start": 2220,
+          "end": 2265,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.book",
+          "sourceText": "New Book",
+          "start": 0,
+          "end": 8,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "author4@example.org",
+          "start": 2167,
+          "end": 2186,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Author Four <author4@example.org>",
+          "start": 2154,
+          "end": 2187,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 2194,
+          "end": 2210,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "This new book develops mathematical models for constrained optimization.\nhttps://example.org/books/constrained-markets",
+          "start": 2267,
+          "end": 2385,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-5-bcafa7ff",
+      "originalIndex": 4,
+      "title": "Call for submissions: Applied Mathematics Annual Meeting 2027",
+      "category": "Call for Papers",
+      "sender": "Organizer Five",
+      "senderEmail": "organizer5@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 2496,
+          "end": 2512,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [
+        {
+          "raw": "December 1, 2026",
+          "iso": "2026-12-01",
+          "kind": "abstract-deadline",
+          "evidence": {
+            "field": "dates[0]",
+            "ruleId": "date.deadline.abstract-deadline",
+            "sourceText": "December 1, 2026",
+            "start": 96,
+            "end": 112,
+            "confidence": "high"
+          }
+        }
+      ],
+      "deadline": {
+        "raw": "December 1, 2026",
+        "iso": "2026-12-01",
+        "kind": "abstract-deadline",
+        "evidence": {
+          "field": "dates[0]",
+          "ruleId": "date.deadline.abstract-deadline",
+          "sourceText": "December 1, 2026",
+          "start": 96,
+          "end": 112,
+          "confidence": "high"
+        }
+      },
+      "salary": null,
+      "funding": null,
+      "tags": [],
+      "urls": [
+        {
+          "url": "https://example.org/annual-meeting",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/annual-meeting",
+            "start": 114,
+            "end": 148,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The annual meeting welcomes contributions in applied mathematics.\nAbstract submission deadline: December 1, 2026.\nhttps://example.org/annual-meeting",
+      "relevance": {
+        "score": 0,
+        "matches": []
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Call for submissions: Applied Mathematics Annual Meeting 2027",
+          "start": 2522,
+          "end": 2583,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.call-for-papers",
+          "sourceText": "Call for submissions",
+          "start": 0,
+          "end": 20,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "organizer5@example.org",
+          "start": 2466,
+          "end": 2488,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Organizer Five <organizer5@example.org>",
+          "start": 2450,
+          "end": 2489,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 2496,
+          "end": 2512,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The annual meeting welcomes contributions in applied mathematics.\nAbstract submission deadline: December 1, 2026.\nhttps://example.org/annual-meeting",
+          "start": 2585,
+          "end": 2733,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-6-ef4d22a6",
+      "originalIndex": 5,
+      "title": "Mathematics and Image Analysis Conference 2027",
+      "category": "Conference",
+      "sender": "Organizer Six",
+      "senderEmail": "organizer6@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 2843,
+          "end": 2859,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [
+        {
+          "raw": "February 10, 2027",
+          "iso": "2027-02-10",
+          "kind": "event-start",
+          "evidence": {
+            "field": "dates[0]",
+            "ruleId": "date.event-start",
+            "sourceText": "February 10, 2027",
+            "start": 134,
+            "end": 151,
+            "confidence": "high"
+          }
+        },
+        {
+          "raw": "February 12, 2027",
+          "iso": "2027-02-12",
+          "kind": "event-end",
+          "evidence": {
+            "field": "dates[1]",
+            "ruleId": "date.event-end",
+            "sourceText": "February 12, 2027",
+            "start": 134,
+            "end": 151,
+            "confidence": "high"
+          }
+        },
+        {
+          "raw": "December 18, 2026",
+          "iso": "2026-12-18",
+          "kind": "registration-deadline",
+          "evidence": {
+            "field": "dates[2]",
+            "ruleId": "date.deadline.registration-deadline",
+            "sourceText": "December 18, 2026",
+            "start": 179,
+            "end": 196,
+            "confidence": "high"
+          }
+        }
+      ],
+      "deadline": {
+        "raw": "December 18, 2026",
+        "iso": "2026-12-18",
+        "kind": "registration-deadline",
+        "evidence": {
+          "field": "dates[2]",
+          "ruleId": "date.deadline.registration-deadline",
+          "sourceText": "December 18, 2026",
+          "start": 179,
+          "end": 196,
+          "confidence": "high"
+        }
+      },
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "inverse problems",
+        "numerical analysis",
+        "PDE",
+        "imaging",
+        "optimization",
+        "machine learning"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/mia-2027",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/mia-2027",
+            "start": 198,
+            "end": 226,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The conference covers inverse problems, imaging, PDE methods, numerical\nanalysis, optimization, and machine learning. It will be held February 10-12,\n2027. Registration deadline: December 18, 2026.\nhttps://example.org/mia-2027",
+      "relevance": {
+        "score": 20,
+        "matches": [
+          {
+            "keyword": "inverse problems",
+            "weight": 5,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.inverse problems[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "inverse problems",
+                "start": 69,
+                "end": 85,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "numerical analysis",
+            "weight": 4,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.numerical analysis[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "numerical\nanalysis",
+                "start": 109,
+                "end": 127,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "PDE",
+            "weight": 4,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.PDE[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "PDE",
+                "start": 96,
+                "end": 99,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "imaging",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.imaging[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "imaging",
+                "start": 87,
+                "end": 94,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "optimization",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.optimization[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "optimization",
+                "start": 129,
+                "end": 141,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "machine learning",
+            "weight": 1,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.machine learning[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "machine learning",
+                "start": 147,
+                "end": 163,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Mathematics and Image Analysis Conference 2027",
+          "start": 2869,
+          "end": 2915,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.conference",
+          "sourceText": "Conference",
+          "start": 31,
+          "end": 41,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "organizer6@example.org",
+          "start": 2813,
+          "end": 2835,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Organizer Six <organizer6@example.org>",
+          "start": 2798,
+          "end": 2836,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 2843,
+          "end": 2859,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The conference covers inverse problems, imaging, PDE methods, numerical\nanalysis, optimization, and machine learning. It will be held February 10-12,\n2027. Registration deadline: December 18, 2026.\nhttps://example.org/mia-2027",
+          "start": 2917,
+          "end": 3143,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-7-84c4e62c",
+      "originalIndex": 6,
+      "title": "Call for Applications: Numerical PDE Summer School 2027",
+      "category": "Summer School",
+      "sender": "Organizer Seven",
+      "senderEmail": "organizer7@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 3255,
+          "end": 3271,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [
+        {
+          "raw": "January 8, 2027",
+          "iso": "2027-01-08",
+          "kind": "application-deadline",
+          "evidence": {
+            "field": "dates[0]",
+            "ruleId": "date.deadline.application-deadline",
+            "sourceText": "January 8, 2027",
+            "start": 128,
+            "end": 143,
+            "confidence": "high"
+          }
+        }
+      ],
+      "deadline": {
+        "raw": "January 8, 2027",
+        "iso": "2027-01-08",
+        "kind": "application-deadline",
+        "evidence": {
+          "field": "dates[0]",
+          "ruleId": "date.deadline.application-deadline",
+          "sourceText": "January 8, 2027",
+          "start": 128,
+          "end": 143,
+          "confidence": "high"
+        }
+      },
+      "salary": null,
+      "funding": "travel and accommodation support for all selected participants",
+      "tags": [
+        "PDE",
+        "scientific computing",
+        "preconditioning"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/pde-summer-school",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/pde-summer-school",
+            "start": 220,
+            "end": 257,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The summer school covers nonlinear solvers, preconditioning, scientific\ncomputing, and multiphysics PDEs. Applications close on January 8, 2027.\nWe provide travel and accommodation support for all selected participants.\nhttps://example.org/pde-summer-school",
+      "relevance": {
+        "score": 19,
+        "matches": [
+          {
+            "keyword": "PDE",
+            "weight": 4,
+            "occurrences": 3,
+            "evidence": [
+              {
+                "field": "relevance.matches.PDE[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "PDE",
+                "start": 33,
+                "end": 36,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.PDE[1]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "pde",
+                "start": 296,
+                "end": 299,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.PDE[2]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "PDEs",
+                "start": 156,
+                "end": 160,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "scientific computing",
+            "weight": 4,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.scientific computing[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "scientific\ncomputing",
+                "start": 117,
+                "end": 137,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "preconditioning",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.preconditioning[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "preconditioning",
+                "start": 100,
+                "end": 115,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Call for Applications: Numerical PDE Summer School 2027",
+          "start": 3281,
+          "end": 3336,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.summer-school",
+          "sourceText": "Summer School",
+          "start": 37,
+          "end": 50,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "organizer7@example.org",
+          "start": 3225,
+          "end": 3247,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Organizer Seven <organizer7@example.org>",
+          "start": 3208,
+          "end": 3248,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 3255,
+          "end": 3271,
+          "confidence": "high"
+        },
+        {
+          "field": "funding",
+          "ruleId": "compensation.explicit-funding",
+          "sourceText": "travel and accommodation support for all selected participants",
+          "start": 156,
+          "end": 218,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The summer school covers nonlinear solvers, preconditioning, scientific\ncomputing, and multiphysics PDEs. Applications close on January 8, 2027.\nWe provide travel and accommodation support for all selected participants.\nhttps://example.org/pde-summer-school",
+          "start": 3338,
+          "end": 3595,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-8-c9352330",
+      "originalIndex": 7,
+      "title": "PhD position in scientific computing",
+      "category": "PhD",
+      "sender": "Supervisor Eight",
+      "senderEmail": "supervisor8@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 3709,
+          "end": 3725,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [],
+      "deadline": null,
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "scientific computing"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/jobs/phd-scientific-computing",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/jobs/phd-scientific-computing",
+            "start": 88,
+            "end": 137,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "This PhD position studies randomized numerical linear algebra and scientific\ncomputing.\nhttps://example.org/jobs/phd-scientific-computing",
+      "relevance": {
+        "score": 8,
+        "matches": [
+          {
+            "keyword": "scientific computing",
+            "weight": 4,
+            "occurrences": 2,
+            "evidence": [
+              {
+                "field": "relevance.matches.scientific computing[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "scientific computing",
+                "start": 16,
+                "end": 36,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.scientific computing[1]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "scientific\ncomputing",
+                "start": 103,
+                "end": 123,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "PhD position in scientific computing",
+          "start": 3735,
+          "end": 3771,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.phd",
+          "sourceText": "PhD position",
+          "start": 0,
+          "end": 12,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "supervisor8@example.org",
+          "start": 3678,
+          "end": 3701,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Supervisor Eight <supervisor8@example.org>",
+          "start": 3660,
+          "end": 3702,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 3709,
+          "end": 3725,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "This PhD position studies randomized numerical linear algebra and scientific\ncomputing.\nhttps://example.org/jobs/phd-scientific-computing",
+          "start": 3773,
+          "end": 3910,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-9-a197c06d",
+      "originalIndex": 8,
+      "title": "Postdoc: SciML and Numerical Weather Prediction",
+      "category": "Postdoc",
+      "sender": "Supervisor Nine",
+      "senderEmail": "supervisor9@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 4023,
+          "end": 4039,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [
+        {
+          "raw": "November 15, 2026",
+          "iso": "2026-11-15",
+          "kind": "application-deadline",
+          "evidence": {
+            "field": "dates[0]",
+            "ruleId": "date.deadline.application-deadline",
+            "sourceText": "November 15, 2026",
+            "start": 166,
+            "end": 183,
+            "confidence": "high"
+          }
+        }
+      ],
+      "deadline": {
+        "raw": "November 15, 2026",
+        "iso": "2026-11-15",
+        "kind": "application-deadline",
+        "evidence": {
+          "field": "dates[0]",
+          "ruleId": "date.deadline.application-deadline",
+          "sourceText": "November 15, 2026",
+          "start": 166,
+          "end": 183,
+          "confidence": "high"
+        }
+      },
+      "salary": "CAD $62,500 per year",
+      "funding": null,
+      "tags": [
+        "PDE",
+        "scientific computing",
+        "operator learning",
+        "scientific machine learning"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/jobs/sciml-weather",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/jobs/sciml-weather",
+            "start": 221,
+            "end": 259,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The project combines scientific computing, operator learning, numerical PDEs,\nand scientific machine learning. Salary: CAD $62,500 per year.\nApplications received by November 15, 2026 receive full consideration.\nApply at https://example.org/jobs/sciml-weather",
+      "relevance": {
+        "score": 16,
+        "matches": [
+          {
+            "keyword": "PDE",
+            "weight": 4,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.PDE[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "PDEs",
+                "start": 120,
+                "end": 124,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "scientific computing",
+            "weight": 4,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.scientific computing[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "scientific computing",
+                "start": 69,
+                "end": 89,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "operator learning",
+            "weight": 2,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.operator learning[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "operator learning",
+                "start": 91,
+                "end": 108,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "scientific machine learning",
+            "weight": 2,
+            "occurrences": 3,
+            "evidence": [
+              {
+                "field": "relevance.matches.scientific machine learning[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "scientific machine learning",
+                "start": 130,
+                "end": 157,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.scientific machine learning[1]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "SciML",
+                "start": 9,
+                "end": 14,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.scientific machine learning[2]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "sciml",
+                "start": 294,
+                "end": 299,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Postdoc: SciML and Numerical Weather Prediction",
+          "start": 4049,
+          "end": 4096,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.postdoc",
+          "sourceText": "Postdoc",
+          "start": 0,
+          "end": 7,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "supervisor9@example.org",
+          "start": 3992,
+          "end": 4015,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Supervisor Nine <supervisor9@example.org>",
+          "start": 3975,
+          "end": 4016,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 4023,
+          "end": 4039,
+          "confidence": "high"
+        },
+        {
+          "field": "salary",
+          "ruleId": "compensation.explicit-salary",
+          "sourceText": "CAD $62,500 per year",
+          "start": 119,
+          "end": 139,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The project combines scientific computing, operator learning, numerical PDEs,\nand scientific machine learning. Salary: CAD $62,500 per year.\nApplications received by November 15, 2026 receive full consideration.\nApply at https://example.org/jobs/sciml-weather",
+          "start": 4098,
+          "end": 4357,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-10-5d2d12bb",
+      "originalIndex": 9,
+      "title": "Postdoc positions in Computational Modeling",
+      "category": "Postdoc",
+      "sender": "Supervisor Ten",
+      "senderEmail": "supervisor10@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 4470,
+          "end": 4486,
+          "confidence": "high"
+        }
+      },
+      "organization": "Example Research University",
+      "location": "Example City, EC, USA",
+      "dates": [],
+      "deadline": null,
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "imaging",
+        "machine learning"
+      ],
+      "urls": [],
+      "originalBody": "Institution: Example Research University, Example City, EC, USA\nThese postdoc positions cover mathematical biology, imaging, and machine\nlearning.",
+      "relevance": {
+        "score": 4,
+        "matches": [
+          {
+            "keyword": "imaging",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.imaging[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "imaging",
+                "start": 160,
+                "end": 167,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "machine learning",
+            "weight": 1,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.machine learning[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "machine\nlearning",
+                "start": 173,
+                "end": 189,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Postdoc positions in Computational Modeling",
+          "start": 4496,
+          "end": 4539,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.postdoc",
+          "sourceText": "Postdoc",
+          "start": 0,
+          "end": 7,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "supervisor10@example.org",
+          "start": 4438,
+          "end": 4462,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Supervisor Ten <supervisor10@example.org>",
+          "start": 4422,
+          "end": 4463,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 4470,
+          "end": 4486,
+          "confidence": "high"
+        },
+        {
+          "field": "organization",
+          "ruleId": "weak-fields.explicit-institution",
+          "sourceText": "Example Research University",
+          "start": 13,
+          "end": 40,
+          "confidence": "high"
+        },
+        {
+          "field": "location",
+          "ruleId": "weak-fields.explicit-institution-location",
+          "sourceText": "Example City, EC, USA",
+          "start": 42,
+          "end": 63,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "Institution: Example Research University, Example City, EC, USA\nThese postdoc positions cover mathematical biology, imaging, and machine\nlearning.",
+          "start": 4541,
+          "end": 4687,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-11-1def194e",
+      "originalIndex": 10,
+      "title": "Postdoctoral Position: Scientific Computing Fellowship",
+      "category": "Postdoc",
+      "sender": "Supervisor Eleven",
+      "senderEmail": "supervisor11@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 4803,
+          "end": 4819,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [
+        {
+          "raw": "November 18, 2026",
+          "iso": "2026-11-18",
+          "kind": "application-deadline",
+          "evidence": {
+            "field": "dates[0]",
+            "ruleId": "date.deadline.application-deadline",
+            "sourceText": "November 18, 2026",
+            "start": 98,
+            "end": 115,
+            "confidence": "high"
+          }
+        }
+      ],
+      "deadline": {
+        "raw": "November 18, 2026",
+        "iso": "2026-11-18",
+        "kind": "application-deadline",
+        "evidence": {
+          "field": "dates[0]",
+          "ruleId": "date.deadline.application-deadline",
+          "sourceText": "November 18, 2026",
+          "start": 98,
+          "end": 115,
+          "confidence": "high"
+        }
+      },
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "scientific computing",
+        "computational mathematics"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/jobs/scientific-computing-fellowship",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/jobs/scientific-computing-fellowship",
+            "start": 171,
+            "end": 227,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The fellowship supports computational mathematics and scientific computing.\nApplications close on November 18, 2026. It includes a generous professional\ntravel allowance.\nhttps://example.org/jobs/scientific-computing-fellowship",
+      "relevance": {
+        "score": 11,
+        "matches": [
+          {
+            "keyword": "scientific computing",
+            "weight": 4,
+            "occurrences": 2,
+            "evidence": [
+              {
+                "field": "relevance.matches.scientific computing[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "Scientific Computing",
+                "start": 23,
+                "end": 43,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.scientific computing[1]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "scientific computing",
+                "start": 109,
+                "end": 129,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "computational mathematics",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.computational mathematics[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "computational mathematics",
+                "start": 79,
+                "end": 104,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Postdoctoral Position: Scientific Computing Fellowship",
+          "start": 4829,
+          "end": 4883,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.postdoc",
+          "sourceText": "Postdoctoral",
+          "start": 0,
+          "end": 12,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "supervisor11@example.org",
+          "start": 4771,
+          "end": 4795,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Supervisor Eleven <supervisor11@example.org>",
+          "start": 4752,
+          "end": 4796,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 4803,
+          "end": 4819,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The fellowship supports computational mathematics and scientific computing.\nApplications close on November 18, 2026. It includes a generous professional\ntravel allowance.\nhttps://example.org/jobs/scientific-computing-fellowship",
+          "start": 4885,
+          "end": 5112,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-12-64ba5c34",
+      "originalIndex": 11,
+      "title": "Tenure Track Position in Applied Mathematics",
+      "category": "Faculty",
+      "sender": "Search Committee Twelve",
+      "senderEmail": "committee12@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 5233,
+          "end": 5249,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [
+        {
+          "raw": "November 30, 2026",
+          "iso": "2026-11-30",
+          "kind": "application-deadline",
+          "evidence": {
+            "field": "dates[0]",
+            "ruleId": "date.deadline.application-deadline",
+            "sourceText": "November 30, 2026",
+            "start": 113,
+            "end": 130,
+            "confidence": "high"
+          }
+        }
+      ],
+      "deadline": {
+        "raw": "November 30, 2026",
+        "iso": "2026-11-30",
+        "kind": "application-deadline",
+        "evidence": {
+          "field": "dates[0]",
+          "ruleId": "date.deadline.application-deadline",
+          "sourceText": "November 30, 2026",
+          "start": 113,
+          "end": 130,
+          "confidence": "high"
+        }
+      },
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "numerical analysis",
+        "scientific computing",
+        "imaging",
+        "optimization"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/jobs/tenure-track-applied-math",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/jobs/tenure-track-applied-math",
+            "start": 132,
+            "end": 182,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The department seeks candidates in numerical analysis, optimization, imaging,\nand scientific computing. Apply by November 30, 2026.\nhttps://example.org/jobs/tenure-track-applied-math",
+      "relevance": {
+        "score": 14,
+        "matches": [
+          {
+            "keyword": "numerical analysis",
+            "weight": 4,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.numerical analysis[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "numerical analysis",
+                "start": 80,
+                "end": 98,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "scientific computing",
+            "weight": 4,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.scientific computing[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "scientific computing",
+                "start": 127,
+                "end": 147,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "imaging",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.imaging[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "imaging",
+                "start": 114,
+                "end": 121,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "optimization",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.optimization[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "optimization",
+                "start": 100,
+                "end": 112,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Tenure Track Position in Applied Mathematics",
+          "start": 5259,
+          "end": 5303,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.faculty",
+          "sourceText": "Tenure Track",
+          "start": 0,
+          "end": 12,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "committee12@example.org",
+          "start": 5202,
+          "end": 5225,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Search Committee Twelve <committee12@example.org>",
+          "start": 5177,
+          "end": 5226,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 5233,
+          "end": 5249,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The department seeks candidates in numerical analysis, optimization, imaging,\nand scientific computing. Apply by November 30, 2026.\nhttps://example.org/jobs/tenure-track-applied-math",
+          "start": 5305,
+          "end": 5487,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-13-f9e2596c",
+      "originalIndex": 12,
+      "title": "Tenure-track Assistant Professor in Inverse Problems",
+      "category": "Faculty",
+      "sender": "Search Committee Thirteen committee13©example.org",
+      "senderEmail": null,
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 5608,
+          "end": 5624,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [
+        {
+          "raw": "October 15, 2026",
+          "iso": "2026-10-15",
+          "kind": "application-deadline",
+          "evidence": {
+            "field": "dates[0]",
+            "ruleId": "date.deadline.application-deadline",
+            "sourceText": "October 15, 2026",
+            "start": 81,
+            "end": 97,
+            "confidence": "high"
+          }
+        }
+      ],
+      "deadline": {
+        "raw": "October 15, 2026",
+        "iso": "2026-10-15",
+        "kind": "application-deadline",
+        "evidence": {
+          "field": "dates[0]",
+          "ruleId": "date.deadline.application-deadline",
+          "sourceText": "October 15, 2026",
+          "start": 81,
+          "end": 97,
+          "confidence": "high"
+        }
+      },
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "inverse problems",
+        "optimization"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/jobs/inverse-problems-faculty",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/jobs/inverse-problems-faculty",
+            "start": 99,
+            "end": 148,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The position focuses on inverse problems and optimization. Applications close\non October 15, 2026.\nhttps://example.org/jobs/inverse-problems-faculty",
+      "relevance": {
+        "score": 13,
+        "matches": [
+          {
+            "keyword": "inverse problems",
+            "weight": 5,
+            "occurrences": 2,
+            "evidence": [
+              {
+                "field": "relevance.matches.inverse problems[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "Inverse Problems",
+                "start": 36,
+                "end": 52,
+                "confidence": "high"
+              },
+              {
+                "field": "relevance.matches.inverse problems[1]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "inverse problems",
+                "start": 77,
+                "end": 93,
+                "confidence": "high"
+              }
+            ]
+          },
+          {
+            "keyword": "optimization",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.optimization[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "optimization",
+                "start": 98,
+                "end": 110,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Tenure-track Assistant Professor in Inverse Problems",
+          "start": 5634,
+          "end": 5686,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.faculty",
+          "sourceText": "Tenure-track",
+          "start": 0,
+          "end": 12,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Search Committee Thirteen committee13©example.org",
+          "start": 5552,
+          "end": 5601,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 5608,
+          "end": 5624,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The position focuses on inverse problems and optimization. Applications close\non October 15, 2026.\nhttps://example.org/jobs/inverse-problems-faculty",
+          "start": 5688,
+          "end": 5836,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 0.95,
+      "warnings": [
+        "From field resembles an email address but is not syntactically valid; senderEmail left null."
+      ]
+    },
+    {
+      "id": "na-26-40-14-d218c07e",
+      "originalIndex": 13,
+      "title": "Contents, Applied Mathematics New Volume: AMJ Vol. 9",
+      "category": "Journal / New Issue",
+      "sender": "Journal Editor Fourteen",
+      "senderEmail": "editor14@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 5954,
+          "end": 5970,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [],
+      "deadline": null,
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "computational mathematics"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/journals/amj/9",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/journals/amj/9",
+            "start": 75,
+            "end": 109,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The new volume contains articles in applied and computational mathematics.\nhttps://example.org/journals/amj/9",
+      "relevance": {
+        "score": 3,
+        "matches": [
+          {
+            "keyword": "computational mathematics",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.computational mathematics[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "computational mathematics",
+                "start": 101,
+                "end": 126,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Contents, Applied Mathematics New Volume: AMJ Vol. 9",
+          "start": 5980,
+          "end": 6032,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.journal-issue",
+          "sourceText": "Contents, Applied Mathematics New Volume",
+          "start": 0,
+          "end": 40,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "editor14@example.org",
+          "start": 5926,
+          "end": 5946,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Journal Editor Fourteen <editor14@example.org>",
+          "start": 5901,
+          "end": 5947,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 5954,
+          "end": 5970,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The new volume contains articles in applied and computational mathematics.\nhttps://example.org/journals/amj/9",
+          "start": 6034,
+          "end": 6143,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-15-4edbdf34",
+      "originalIndex": 14,
+      "title": "Contents, Computational Science New Volume: CSJ Vol. 26",
+      "category": "Journal / New Issue",
+      "sender": "Journal Editor Fifteen",
+      "senderEmail": "editor15@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 6260,
+          "end": 6276,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [],
+      "deadline": null,
+      "salary": null,
+      "funding": null,
+      "tags": [
+        "optimization"
+      ],
+      "urls": [
+        {
+          "url": "https://example.org/journals/csj/26",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/journals/csj/26",
+            "start": 76,
+            "end": 111,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The new volume contains articles in computational science and optimization.\nhttps://example.org/journals/csj/26",
+      "relevance": {
+        "score": 3,
+        "matches": [
+          {
+            "keyword": "optimization",
+            "weight": 3,
+            "occurrences": 1,
+            "evidence": [
+              {
+                "field": "relevance.matches.optimization[0]",
+                "ruleId": "relevance.keyword",
+                "sourceText": "optimization",
+                "start": 118,
+                "end": 130,
+                "confidence": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Contents, Computational Science New Volume: CSJ Vol. 26",
+          "start": 6286,
+          "end": 6341,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.journal-issue",
+          "sourceText": "Contents, Computational Science New Volume",
+          "start": 0,
+          "end": 42,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "editor15@example.org",
+          "start": 6232,
+          "end": 6252,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Journal Editor Fifteen <editor15@example.org>",
+          "start": 6208,
+          "end": 6253,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 6260,
+          "end": 6276,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The new volume contains articles in computational science and optimization.\nhttps://example.org/journals/csj/26",
+          "start": 6343,
+          "end": 6454,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-16-c1f3dece",
+      "originalIndex": 15,
+      "title": "Contents, Mathematical Foundations New Volume: MFJ Vol. 10",
+      "category": "Journal / New Issue",
+      "sender": "Journal Editor Sixteen",
+      "senderEmail": "editor16@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 6571,
+          "end": 6587,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [],
+      "deadline": null,
+      "salary": null,
+      "funding": null,
+      "tags": [],
+      "urls": [
+        {
+          "url": "https://example.org/journals/mfj/10",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/journals/mfj/10",
+            "start": 62,
+            "end": 97,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The new volume contains articles in mathematical foundations.\nhttps://example.org/journals/mfj/10",
+      "relevance": {
+        "score": 0,
+        "matches": []
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Contents, Mathematical Foundations New Volume: MFJ Vol. 10",
+          "start": 6597,
+          "end": 6655,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.journal-issue",
+          "sourceText": "Contents, Mathematical Foundations New Volume",
+          "start": 0,
+          "end": 45,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "editor16@example.org",
+          "start": 6543,
+          "end": 6563,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Journal Editor Sixteen <editor16@example.org>",
+          "start": 6519,
+          "end": 6564,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 6571,
+          "end": 6587,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The new volume contains articles in mathematical foundations.\nhttps://example.org/journals/mfj/10",
+          "start": 6657,
+          "end": 6754,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    },
+    {
+      "id": "na-26-40-17-c9ebc614",
+      "originalIndex": 16,
+      "title": "Call for papers: Fast Integral Equations special issue",
+      "category": "Call for Papers",
+      "sender": "Guest Editor Seventeen",
+      "senderEmail": "editor17@example.org",
+      "messageDate": {
+        "raw": "October 01, 2026",
+        "iso": "2026-10-01",
+        "kind": "message-date",
+        "evidence": {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 6871,
+          "end": 6887,
+          "confidence": "high"
+        }
+      },
+      "organization": null,
+      "location": null,
+      "dates": [
+        {
+          "raw": "April 30, 2027",
+          "iso": "2027-04-30",
+          "kind": "submission-deadline",
+          "evidence": {
+            "field": "dates[0]",
+            "ruleId": "date.deadline.submission-deadline",
+            "sourceText": "April 30, 2027",
+            "start": 96,
+            "end": 110,
+            "confidence": "high"
+          }
+        }
+      ],
+      "deadline": {
+        "raw": "April 30, 2027",
+        "iso": "2027-04-30",
+        "kind": "submission-deadline",
+        "evidence": {
+          "field": "dates[0]",
+          "ruleId": "date.deadline.submission-deadline",
+          "sourceText": "April 30, 2027",
+          "start": 96,
+          "end": 110,
+          "confidence": "high"
+        }
+      },
+      "salary": null,
+      "funding": null,
+      "tags": [],
+      "urls": [
+        {
+          "url": "https://example.org/journals/special-issue",
+          "evidence": {
+            "field": "urls[0]",
+            "ruleId": "url.http",
+            "sourceText": "https://example.org/journals/special-issue",
+            "start": 112,
+            "end": 154,
+            "confidence": "high"
+          }
+        }
+      ],
+      "originalBody": "The special issue welcomes work on fast algorithms and integral equations.\nSubmission deadline: April 30, 2027.\nhttps://example.org/journals/special-issue",
+      "relevance": {
+        "score": 0,
+        "matches": []
+      },
+      "evidence": [
+        {
+          "field": "title",
+          "ruleId": "header.subject",
+          "sourceText": "Call for papers: Fast Integral Equations special issue",
+          "start": 6897,
+          "end": 6951,
+          "confidence": "high"
+        },
+        {
+          "field": "category",
+          "ruleId": "category.call-for-papers",
+          "sourceText": "Call for papers",
+          "start": 0,
+          "end": 15,
+          "confidence": "high"
+        },
+        {
+          "field": "senderEmail",
+          "ruleId": "header.from.email",
+          "sourceText": "editor17@example.org",
+          "start": 6843,
+          "end": 6863,
+          "confidence": "high"
+        },
+        {
+          "field": "sender",
+          "ruleId": "header.from.name",
+          "sourceText": "Guest Editor Seventeen <editor17@example.org>",
+          "start": 6819,
+          "end": 6864,
+          "confidence": "high"
+        },
+        {
+          "field": "messageDate",
+          "ruleId": "header.date.english",
+          "sourceText": "October 01, 2026",
+          "start": 6871,
+          "end": 6887,
+          "confidence": "high"
+        },
+        {
+          "field": "originalBody",
+          "ruleId": "segment.body",
+          "sourceText": "The special issue welcomes work on fast algorithms and integral equations.\nSubmission deadline: April 30, 2027.\nhttps://example.org/journals/special-issue",
+          "start": 6953,
+          "end": 7107,
+          "confidence": "high"
+        }
+      ],
+      "extractionConfidence": 1,
+      "warnings": []
+    }
+  ],
+  "evidence": [
+    {
+      "field": "newsletterName",
+      "ruleId": "digest.header.name",
+      "sourceText": "NA Digest",
+      "start": 0,
+      "end": 9,
+      "confidence": "high"
+    },
+    {
+      "field": "volume",
+      "ruleId": "digest.header.volume",
+      "sourceText": "26",
+      "start": 32,
+      "end": 34,
+      "confidence": "high"
+    },
+    {
+      "field": "issue",
+      "ruleId": "digest.header.issue",
+      "sourceText": "40",
+      "start": 53,
+      "end": 55,
+      "confidence": "high"
+    },
+    {
+      "field": "editor",
+      "ruleId": "digest.editor",
+      "sourceText": "Editor Example",
+      "start": 82,
+      "end": 96,
+      "confidence": "high"
+    }
+  ],
+  "parseConfidence": 1,
+  "warnings": []
+}

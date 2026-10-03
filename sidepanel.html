@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academic Digest Reader</title>
+    <link rel="stylesheet" href="/src/reader/reader.css" />
+  </head>
+  <body>
+    <div class="reader-shell">
+      <header class="issue-header">
+        <div class="issue-heading-row">
+          <div class="brand-block">
+            <img class="brand-icon" src="/icons/icon-32.png" alt="" width="32" height="32" />
+            <div>
+              <p class="eyebrow" id="source-label">Local fixture</p>
+              <h1 id="newsletter-name">Academic Digest Reader</h1>
+              <p class="issue-meta" id="issue-meta"></p>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button id="refresh-button" class="refresh-button" type="button" hidden>
+              Read current email
+            </button>
+            <label class="theme-control">
+              <span>Theme</span>
+              <select id="theme-select" aria-label="Color theme">
+                <option value="system">System</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <p class="stage-note" id="stage-note">Fixture preview</p>
+      </header>
+
+      <section id="status-panel" class="status-panel" aria-live="polite" hidden>
+        <strong id="status-title"></strong>
+        <p id="status-message"></p>
+        <details id="diagnostic-preview" hidden>
+          <summary>Diagnostic details</summary>
+          <pre id="diagnostic-text"></pre>
+        </details>
+        <div id="status-actions" class="status-actions">
+          <button id="retry-button" type="button">Retry current email</button>
+          <button id="fixture-button" type="button">Use fixture preview</button>
+        </div>
+      </section>
+
+      <section id="digest-overview" class="digest-overview" aria-label="Digest summary">
+        <div>
+          <strong id="overview-total">0</strong>
+          <span>announcements</span>
+        </div>
+        <div>
+          <strong id="overview-relevant">0</strong>
+          <span>matched</span>
+        </div>
+        <div>
+          <strong id="overview-deadlines">0</strong>
+          <span>open deadlines</span>
+        </div>
+        <p>Parsed locally · no email content is sent anywhere</p>
+      </section>
+
+      <details id="digest-notice" class="digest-notice" hidden>
+        <summary id="digest-notice-summary"></summary>
+        <ul id="digest-notice-list"></ul>
+      </details>
+
+      <section id="reader-controls" class="reader-controls" aria-label="Digest controls">
+        <label class="search-field">
+          <span class="visually-hidden">Search announcements</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+            <path d="m21 21-4.4-4.4m2.4-5.1a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" />
+          </svg>
+          <input id="search-input" type="search" placeholder="Search title, topic, body…" autocomplete="off" />
+        </label>
+
+        <div class="filter-strip" id="filter-strip" aria-label="Filter by category">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="relevant" aria-pressed="false">Relevant</button>
+          <button type="button" data-filter="Conference" aria-pressed="false">Conference</button>
+          <button type="button" data-filter="Postdoc" aria-pressed="false">Postdoc</button>
+          <button type="button" data-filter="PhD" aria-pressed="false">PhD</button>
+          <button type="button" data-filter="Faculty" aria-pressed="false">Faculty</button>
+          <button type="button" data-filter="Call for Papers" aria-pressed="false">CFP</button>
+          <button type="button" data-filter="Software" aria-pressed="false">Software</button>
+          <button type="button" data-filter="other" aria-pressed="false">Other</button>
+        </div>
+
+        <div class="result-toolbar">
+          <p id="result-count" aria-live="polite"></p>
+          <label class="sort-control">
+            <span>Sort</span>
+            <select id="sort-select" aria-label="Sort announcements">
+              <option value="original">Original order</option>
+              <option value="relevance">Relevance</option>
+              <option value="deadline">Deadline</option>
+              <option value="date">Date</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <main id="item-list" class="item-list"></main>
+      <p id="empty-state" class="empty-state" hidden>No announcements match the current filters.</p>
+    </div>
+    <script type="module" src="/src/reader/main.ts"></script>
+  </body>
+</html>

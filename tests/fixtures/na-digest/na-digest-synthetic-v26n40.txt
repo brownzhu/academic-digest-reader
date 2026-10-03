@@ -1,0 +1,203 @@
+NA Digest Friday, October 02, 2026 Volume 26 : Issue 40
+
+Today's Editor:
+
+        Editor Example
+        Example University
+        editor@example.org
+
+Today's Topics:
+
+Open problems in numerical analysis and human understanding
+Announcing the release of the NUMA 1.0 Library
+PDE Lab: inspect PDE discretizations in a browser
+New Book: Optimization in Constrained Markets
+Call for submissions: Applied Mathematics Annual Meeting 2027
+Mathematics and Image Analysis Conference 2027
+Call for Applications: Numerical PDE Summer School 2027
+PhD position in scientific computing
+Postdoc: SciML and Numerical Weather Prediction
+Postdoc positions in Computational Modeling
+Postdoctoral Position: Scientific Computing Fellowship
+Tenure Track Position in Applied Mathematics
+Tenure-track Assistant Professor in Inverse Problems
+Contents, Applied Mathematics New Volume: AMJ Vol. 9
+Contents, Computational Science New Volume: CSJ Vol. 26
+Contents, Mathematical Foundations New Volume: MFJ Vol. 10
+Call for papers: Fast Integral Equations special issue
+
+See this issue at https://example.org/digest/26/40
+Submissions, questions, etc. should be sent to editor@example.org.
+
+-------------------------------------------------------
+
+From: Researcher One <researcher1@example.org>
+Date: October 01, 2026
+Subject: Open problems in numerical analysis and human understanding
+
+This research note presents open problems in numerical analysis.
+Deadline: January 1, 2027.
+https://example.org/open-problems
+
+-------------------------------------------------------
+
+From: Developer Two <developer2@example.org>
+Date: October 01, 2026
+Subject: Announcing the release of the NUMA 1.0 Library
+
+NUMA 1.0 is a deterministic numerical software library release.
+Documentation: https://example.org/numa
+
+-------------------------------------------------------
+
+From: Developer Three <developer3@example.org>
+Date: October 01, 2026
+Subject: PDE Lab: inspect PDE discretizations in a browser
+
+PDE Lab is software for inspecting finite-element and finite-difference
+discretizations in a browser.
+https://example.org/pde-lab
+
+-------------------------------------------------------
+
+From: Author Four <author4@example.org>
+Date: October 01, 2026
+Subject: New Book: Optimization in Constrained Markets
+
+This new book develops mathematical models for constrained optimization.
+https://example.org/books/constrained-markets
+
+-------------------------------------------------------
+
+From: Organizer Five <organizer5@example.org>
+Date: October 01, 2026
+Subject: Call for submissions: Applied Mathematics Annual Meeting 2027
+
+The annual meeting welcomes contributions in applied mathematics.
+Abstract submission deadline: December 1, 2026.
+https://example.org/annual-meeting
+
+-------------------------------------------------------
+
+From: Organizer Six <organizer6@example.org>
+Date: October 01, 2026
+Subject: Mathematics and Image Analysis Conference 2027
+
+The conference covers inverse problems, imaging, PDE methods, numerical
+analysis, optimization, and machine learning. It will be held February 10-12,
+2027. Registration deadline: December 18, 2026.
+https://example.org/mia-2027
+
+-------------------------------------------------------
+
+From: Organizer Seven <organizer7@example.org>
+Date: October 01, 2026
+Subject: Call for Applications: Numerical PDE Summer School 2027
+
+The summer school covers nonlinear solvers, preconditioning, scientific
+computing, and multiphysics PDEs. Applications close on January 8, 2027.
+We provide travel and accommodation support for all selected participants.
+https://example.org/pde-summer-school
+
+-------------------------------------------------------
+
+From: Supervisor Eight <supervisor8@example.org>
+Date: October 01, 2026
+Subject: PhD position in scientific computing
+
+This PhD position studies randomized numerical linear algebra and scientific
+computing.
+https://example.org/jobs/phd-scientific-computing
+
+-------------------------------------------------------
+
+From: Supervisor Nine <supervisor9@example.org>
+Date: October 01, 2026
+Subject: Postdoc: SciML and Numerical Weather Prediction
+
+The project combines scientific computing, operator learning, numerical PDEs,
+and scientific machine learning. Salary: CAD $62,500 per year.
+Applications received by November 15, 2026 receive full consideration.
+Apply at https://example.org/jobs/sciml-weather
+
+-------------------------------------------------------
+
+From: Supervisor Ten <supervisor10@example.org>
+Date: October 01, 2026
+Subject: Postdoc positions in Computational Modeling
+
+Institution: Example Research University, Example City, EC, USA
+These postdoc positions cover mathematical biology, imaging, and machine
+learning.
+
+-------------------------------------------------------
+
+From: Supervisor Eleven <supervisor11@example.org>
+Date: October 01, 2026
+Subject: Postdoctoral Position: Scientific Computing Fellowship
+
+The fellowship supports computational mathematics and scientific computing.
+Applications close on November 18, 2026. It includes a generous professional
+travel allowance.
+https://example.org/jobs/scientific-computing-fellowship
+
+-------------------------------------------------------
+
+From: Search Committee Twelve <committee12@example.org>
+Date: October 01, 2026
+Subject: Tenure Track Position in Applied Mathematics
+
+The department seeks candidates in numerical analysis, optimization, imaging,
+and scientific computing. Apply by November 30, 2026.
+https://example.org/jobs/tenure-track-applied-math
+
+-------------------------------------------------------
+
+From: Search Committee Thirteen committee13©example.org
+Date: October 01, 2026
+Subject: Tenure-track Assistant Professor in Inverse Problems
+
+The position focuses on inverse problems and optimization. Applications close
+on October 15, 2026.
+https://example.org/jobs/inverse-problems-faculty
+
+-------------------------------------------------------
+
+From: Journal Editor Fourteen <editor14@example.org>
+Date: October 01, 2026
+Subject: Contents, Applied Mathematics New Volume: AMJ Vol. 9
+
+The new volume contains articles in applied and computational mathematics.
+https://example.org/journals/amj/9
+
+-------------------------------------------------------
+
+From: Journal Editor Fifteen <editor15@example.org>
+Date: October 01, 2026
+Subject: Contents, Computational Science New Volume: CSJ Vol. 26
+
+The new volume contains articles in computational science and optimization.
+https://example.org/journals/csj/26
+
+-------------------------------------------------------
+
+From: Journal Editor Sixteen <editor16@example.org>
+Date: October 01, 2026
+Subject: Contents, Mathematical Foundations New Volume: MFJ Vol. 10
+
+The new volume contains articles in mathematical foundations.
+https://example.org/journals/mfj/10
+
+-------------------------------------------------------
+
+From: Guest Editor Seventeen <editor17@example.org>
+Date: October 01, 2026
+Subject: Call for papers: Fast Integral Equations special issue
+
+The special issue welcomes work on fast algorithms and integral equations.
+Submission deadline: April 30, 2027.
+https://example.org/journals/special-issue
+
+-------------------------------------------------------
+
+End of NA Digest, Volume 26, Issue 40
