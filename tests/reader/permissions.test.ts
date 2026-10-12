@@ -117,6 +117,8 @@ describe("optional Gmail permission flow", () => {
     expect(document.getElementById("item-list")?.hidden).toBe(true);
     expect(document.getElementById("issue-meta")?.textContent).toBe("");
     expect(document.getElementById("status-title")?.textContent).toBe("Original message view");
+    expect(document.getElementById("refresh-feedback")?.dataset.state).toBe("success");
+    expect(document.getElementById("refresh-feedback-detail")?.textContent).toContain("Original message loaded");
 
     document.getElementById("refresh-button")?.click();
     await vi.waitFor(() => expect(document.getElementById("newsletter-name")?.textContent).toBe("NA Digest"));
@@ -164,6 +166,70 @@ describe("optional Gmail permission flow", () => {
     expect(document.querySelector(".flag-saved")?.getAttribute("aria-pressed")).toBe("false");
     expect(document.documentElement.dataset.theme).toBe("system");
     expect(document.getElementById("sync-status")?.textContent).toContain("Chrome Sync");
+  });
+
+
+  it("shows refresh progress, completion time/count and confirmation for unchanged mail", async () => {
+    const result = await sendMessage();
+    let complete!: (value: ExtractionResponse) => void;
+    let started = false;
+    sendMessage.mockImplementationOnce(() => {
+      started = true;
+      return new Promise<ExtractionResponse>(resolve => { complete = resolve; });
+    });
+    const button = document.getElementById("refresh-button") as HTMLButtonElement;
+    const banner = document.getElementById("refresh-feedback")!;
+    button.click();
+    expect(banner.hidden).toBe(false);
+    expect(banner.dataset.state).toBe("loading");
+    expect(button.disabled).toBe(true);
+    await vi.waitFor(() => expect(started).toBe(true));
+    expect(document.getElementById("retry-button")?.hasAttribute("disabled")).toBe(true);
+    complete(result);
+    await vi.waitFor(() => expect(banner.dataset.state).toBe("success"));
+    expect(document.getElementById("refresh-feedback-title")?.textContent).toBe("✓ Email refreshed");
+    expect(document.getElementById("refresh-feedback-detail")?.textContent).toMatch(/\d{2}:\d{2}.*17 announcements loaded/);
+    expect(button.disabled).toBe(false);
+    expect(banner.getAttribute("aria-live")).toBe("polite");
+
+    button.click();
+    expect(banner.dataset.state).toBe("loading");
+    await vi.waitFor(() => expect(banner.dataset.state).toBe("success"));
+    expect(document.getElementById("refresh-feedback-detail")?.textContent).toContain("No changes since last read");
+    if (!result.ok) throw new Error("Expected a successful fixture extraction");
+    sendMessage.mockResolvedValueOnce({ ...result, message: { ...result.message, links: [{ text: "Updated link", url: "https://example.org/updated" }] } });
+    button.click();
+    await vi.waitFor(() => expect(banner.dataset.state).toBe("success"));
+    expect(document.getElementById("refresh-feedback-detail")?.textContent).not.toContain("No changes since last read");
+  });
+
+  it("replaces the previous success notice on extraction and permission failures", async () => {
+    const button = document.getElementById("refresh-button") as HTMLButtonElement;
+    const banner = document.getElementById("refresh-feedback")!;
+    sendMessage.mockResolvedValueOnce({ ok: false, error: { code: "no-message-body", message: "Open a message first.", diagnostics: [] } });
+    button.click();
+    await vi.waitFor(() => expect(banner.dataset.state).toBe("error"));
+    expect(banner.textContent).toContain("Open a message first.");
+    expect(banner.textContent).not.toContain("announcements loaded");
+    expect(button.disabled).toBe(false);
+
+    sendMessage.mockRejectedValueOnce(new Error("Background unavailable"));
+    button.click();
+    await vi.waitFor(() => expect(banner.dataset.state).toBe("error"));
+    expect(banner.textContent).toContain("could not contact Gmail");
+    expect(button.disabled).toBe(false);
+
+    request.mockResolvedValueOnce(false);
+    button.click();
+    await vi.waitFor(() => expect(banner.textContent).toContain("Gmail access was not granted"));
+    expect(banner.dataset.state).toBe("error");
+    expect(button.disabled).toBe(false);
+
+    request.mockRejectedValueOnce(new Error("Permission unavailable"));
+    button.click();
+    await vi.waitFor(() => expect(banner.textContent).toContain("Could not request Gmail access"));
+    expect(banner.dataset.state).toBe("error");
+    expect(button.disabled).toBe(false);
   });
 
 });

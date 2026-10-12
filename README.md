@@ -21,7 +21,7 @@ Side Panel. It is designed for long mathematical and scientific mailing-list
 digests where deadlines, positions, conferences, software releases, and calls
 for papers are otherwise difficult to scan.
 
-> **Current scope:** v0.6.0 supports **NA Digest, IPNet Digest, and Mailman-style
+> **Current scope:** v0.6.1 supports **NA Digest, IPNet Digest, and Mailman-style
 > plain-text digests**. Other formats open in a clearly labeled original-message
 > view, without inferred announcement cards. There is no remote service, AI
 > backend, analytics, or inbox-wide collection.
@@ -108,7 +108,9 @@ After rebuilding, click the extension card's reload button on
 - **Find in original message** highlights literal matches, including Chinese,
   with previous/next navigation. Highlight rendering is capped at 1,000 matches
   while retaining the entire text.
-- **Refresh email** after navigating to another Gmail message.
+- **Refresh email** after navigating to another Gmail message. A prominent banner
+  shows progress, then confirms completion with a timestamp and item count.
+  Unchanged emails are explicitly confirmed; failures never show a success notice.
 
 The standalone Vite preview uses a synthetic fixture because Gmail extension
 APIs are available only inside the installed extension.

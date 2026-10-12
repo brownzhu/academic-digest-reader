@@ -59,6 +59,8 @@ const statusMessage = requiredElement<HTMLElement>("status-message");
 const statusActions = requiredElement<HTMLElement>("status-actions");
 const diagnosticPreview = requiredElement<HTMLDetailsElement>("diagnostic-preview");
 const diagnosticText = requiredElement<HTMLElement>("diagnostic-text");
+const refreshFeedback = requiredElement<HTMLElement>("refresh-feedback");
+let lastReadMessage: string | null = null;
 const refreshButton = requiredElement<HTMLButtonElement>("refresh-button");
 const retryButton = requiredElement<HTMLButtonElement>("retry-button");
 const fixtureButton = requiredElement<HTMLButtonElement>("fixture-button");
@@ -73,6 +75,20 @@ function node<K extends keyof HTMLElementTagNameMap>(
   if (className) element.className = className;
   if (text !== undefined) element.textContent = text;
   return element;
+}
+
+function showRefreshFeedback(status: "loading" | "success" | "error", title: string, detail: string): void {
+  refreshFeedback.dataset.state = status;
+  refreshFeedback.hidden = false;
+  requiredElement("refresh-feedback-title").textContent = title;
+  requiredElement("refresh-feedback-detail").textContent = detail;
+}
+
+function clearRefreshFeedback(): void {
+  refreshFeedback.hidden = true;
+  refreshFeedback.removeAttribute("data-state");
+  requiredElement("refresh-feedback-title").textContent = "";
+  requiredElement("refresh-feedback-detail").textContent = "";
 }
 
 function formatDate(iso: string): string {
@@ -415,6 +431,7 @@ function showOriginalMessage(message: ExtractedMessage): void {
 }
 
 function useFixturePreview(): void {
+  clearRefreshFeedback();
   currentDigest = fixtureDigest;
   resetReaderControls();
   initializeHeader(
@@ -428,6 +445,7 @@ function useFixturePreview(): void {
 }
 
 function showPermissionPrompt(wasDenied = false): void {
+  if (wasDenied) showRefreshFeedback("error", "Refresh not completed", "Gmail access was not granted. Allow access to try again.");
   refreshButton.disabled = false;
   refreshButton.textContent = "Allow Gmail access";
   retryButton.disabled = false;
@@ -446,6 +464,8 @@ async function requestGmailAccessAndLoad(): Promise<void> {
 
   refreshButton.disabled = true;
   retryButton.disabled = true;
+  refreshButton.textContent = "Refreshing…";
+  showRefreshFeedback("loading", "Refreshing email…", "Checking access to the current Gmail message.");
   try {
     // Keep the request as the first awaited browser operation so it remains
     // directly associated with the user's button click.
@@ -455,6 +475,7 @@ async function requestGmailAccessAndLoad(): Promise<void> {
       return;
     }
   } catch (error) {
+    showRefreshFeedback("error", "Refresh failed", "Could not request Gmail access. Please try again.");
     showStatus(
       "Could not request Gmail access",
       "Reload this extension on chrome://extensions, then try again.",
@@ -490,7 +511,9 @@ async function loadCurrentGmailMessage(): Promise<void> {
   }
 
   refreshButton.disabled = true;
-  refreshButton.textContent = "Reading…";
+  refreshButton.textContent = "Refreshing…";
+  retryButton.disabled = true;
+  showRefreshFeedback("loading", "Refreshing email…", "Reading the open Gmail message and updating the reader.");
   requiredElement("newsletter-name").textContent = "Academic Digest Reader";
   requiredElement("issue-meta").textContent = "";
   requiredElement("stage-note").textContent = "";
@@ -501,6 +524,8 @@ async function loadCurrentGmailMessage(): Promise<void> {
       type: "extract-current-gmail-message",
     })) as ExtractionResponse;
   } catch (error) {
+    showRefreshFeedback("error", "Refresh failed", "The reader could not contact Gmail. Please try again.");
+    retryButton.disabled = false;
     showStatus(
       "Could not read Gmail",
       "Academic Digest Reader could not contact its background service.",
@@ -512,6 +537,8 @@ async function loadCurrentGmailMessage(): Promise<void> {
   }
 
   if (!response.ok) {
+    showRefreshFeedback("error", "Refresh failed", response.error.message);
+    retryButton.disabled = false;
     showStatus("Could not read this message", response.error.message, [
       ...response.error.diagnostics,
       ...(response.error.rawTextPreview ? [`Raw preview:\n${response.error.rawTextPreview}`] : []),
@@ -521,10 +548,20 @@ async function loadCurrentGmailMessage(): Promise<void> {
     return;
   }
 
-  presentMessage(response.message);
+  const message = response.message;
+  const contentSignature = JSON.stringify([message.subject, message.plainText, message.links]);
+  const unchanged = lastReadMessage === contentSignature;
+  const parsed = presentMessage(message);
+  lastReadMessage = contentSignature;
+  const completedAt = new Intl.DateTimeFormat(undefined, {
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+  }).format(new Date());
+  const result = parsed ? `${currentDigest.items.length} announcements loaded` : "Original message loaded; announcement parsing unavailable";
+  showRefreshFeedback("success", "✓ Email refreshed", `${completedAt} · ${result}${unchanged ? " · No changes since last read." : "."}`);
+  retryButton.disabled = false;
 }
 
-function presentMessage(extracted: ExtractedMessage): void {
+function presentMessage(extracted: ExtractedMessage): boolean {
   requiredElement("issue-meta").textContent = "";
   try {
     currentDigest = parser.parse(extracted.plainText, {
@@ -548,7 +585,7 @@ function presentMessage(extracted: ExtractedMessage): void {
     showOriginalMessage(extracted);
     refreshButton.disabled = false;
     refreshButton.textContent = "Refresh email";
-    return;
+    return false;
   }
 
   resetReaderControls();
@@ -562,6 +599,7 @@ function presentMessage(extracted: ExtractedMessage): void {
   render();
   refreshButton.disabled = false;
   refreshButton.textContent = "Refresh email";
+  return true;
 }
 
 const pastePanel = requiredElement<HTMLElement>("paste-panel");
@@ -591,6 +629,7 @@ requiredElement("paste-read").addEventListener("click", () => {
   }
   const subject = pasteSubject.value.trim() || null;
   closePastePanel();
+  clearRefreshFeedback();
   presentMessage({
     source: "pasted-text", sourceUrl: "", subject,
     sender: null, senderEmail: null, receivedDateText: null, plainText: text,
