@@ -22,6 +22,7 @@
             <button id="refresh-button" class="refresh-button" type="button" hidden>
               Read current email
             </button>
+            <button id="paste-toggle" class="refresh-button" type="button" aria-expanded="false" aria-controls="paste-panel">Paste newsletter</button>
             <label class="theme-control">
               <span>Theme</span>
               <select id="theme-select" aria-label="Color theme">
@@ -34,6 +35,20 @@
         </div>
         <p class="stage-note" id="stage-note">Fixture preview</p>
       </header>
+
+      <section id="paste-panel" class="status-panel" hidden>
+        <h2>Read a copied newsletter</h2>
+        <p>Paste from any mailbox. Text is processed locally and is not saved.</p>
+        <label for="paste-subject">Subject (optional)</label>
+        <input id="paste-subject" type="text" maxlength="500" placeholder="Newsletter subject" />
+        <label for="paste-body">Message text</label>
+        <textarea id="paste-body" rows="8" placeholder="Paste the complete email body here"></textarea>
+        <p id="paste-error" role="alert" hidden></p>
+        <div class="status-actions">
+          <button id="paste-read" type="button">Read pasted text</button>
+          <button id="paste-cancel" type="button">Cancel</button>
+        </div>
+      </section>
 
       <section id="status-panel" class="status-panel" aria-live="polite" hidden>
         <strong id="status-title"></strong>
@@ -69,6 +84,9 @@
         <ul id="digest-notice-list"></ul>
       </details>
 
+      <p id="sync-status" class="sync-status" role="status"></p>
+      <p id="action-feedback" class="action-feedback" role="status" hidden></p>
+
       <section id="reader-controls" class="reader-controls" aria-label="Digest controls">
         <label class="search-field">
           <span class="visually-hidden">Search announcements</span>
@@ -77,6 +95,18 @@
           </svg>
           <input id="search-input" type="search" placeholder="Search title, topic, body…" autocomplete="off" />
         </label>
+
+        <div class="workflow-controls">
+          <label for="workflow-select">In this email</label>
+          <select id="workflow-select">
+            <option value="all">All announcements</option>
+            <option value="saved">Saved</option>
+            <option value="unread">Unread</option>
+            <option value="due">Due within 30 days</option>
+          </select>
+          <button id="reset-filters" class="text-button" type="button">Reset</button>
+        </div>
+        <p class="storage-note">Filter saved/read marks in this email. Email text is not saved. Deadline views do not send notifications.</p>
 
         <div class="filter-strip" id="filter-strip" aria-label="Filter by category">
           <button type="button" data-filter="all" aria-pressed="true">All</button>
@@ -103,6 +133,8 @@
           </label>
         </div>
       </section>
+
+      <section id="original-message-view" class="original-message-view" aria-label="Original message" hidden></section>
 
       <main id="item-list" class="item-list"></main>
       <p id="empty-state" class="empty-state" hidden>No announcements match the current filters.</p>

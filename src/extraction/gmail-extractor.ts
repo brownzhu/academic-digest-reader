@@ -69,8 +69,9 @@ export function extractCurrentGmailMessage(): ExtractedMessage {
     let score = Math.min(30, text.length / 500);
     score += Math.min(40, viewportIntersection / 10);
     if (/NA Digest[\s\S]{0,100}Volume\s+\d+\s*:\s*Issue\s+\d+/i.test(text)) score += 120;
+    if (/IPNet Digest[\s\S]{0,60}Volume\s+\d+\s*,\s*Number\s+\d+/i.test(text)) score += 120;
     if (/Today's Topics:/i.test(text)) score += 30;
-    if (/^From:.+\nDate:.+\nSubject:/m.test(text)) score += 30;
+    if (/^From[ \t]*:.+\n\s*Date[ \t]*:.+\n\s*Subject[ \t]*:/m.test(text)) score += 30;
     return score;
   }
 
@@ -146,10 +147,19 @@ export function extractCurrentGmailMessage(): ExtractedMessage {
       (entry, index, all) => all.findIndex((candidate) => candidate.url === entry.url) === index,
     );
 
+  const clipped = [...(messageContainer ?? selected.element).querySelectorAll<HTMLAnchorElement>("a[href]")]
+    .some(anchor => {
+      try {
+        const url = new URL(anchor.href, location.href);
+        return url.hostname === "mail.google.com" && url.searchParams.get("view") === "lg";
+      } catch { return false; }
+    });
+  if (clipped) warnings.push("Gmail marks this message as clipped. Use Gmail’s ‘View entire message’ link to check the complete content; only the displayed body was read.");
+
   const structuralMatch =
-    /NA Digest/i.test(selected.text) &&
+    /(?:NA|IPNet) Digest/i.test(selected.text) &&
     /Today's Topics:/i.test(selected.text) &&
-    /^From:.+\nDate:.+\nSubject:/m.test(selected.text);
+    /^From[ \t]*:.+\n\s*Date[ \t]*:.+\n\s*Subject[ \t]*:/m.test(selected.text);
 
   return {
     source: "gmail-dom",

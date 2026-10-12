@@ -412,7 +412,8 @@ select {
   padding: 10px 10px 24px;
 }
 
-.item-card {
+.item-card,
+.original-message-view {
   padding: 13px 14px 11px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -714,3 +715,22 @@ h2 {
     padding-inline: 8px;
   }
 }
+
+.workflow-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-top: 9px; font-size: 12px; }
+.workflow-controls select { flex: 1; min-width: 140px; }
+.storage-note { color: var(--text-muted); font-size: 11px; line-height: 1.4; }
+.action-feedback { margin: 10px 14px; padding: 9px; color: var(--soon); background: var(--soon-soft); font-size: 12px; }
+.card-actions { flex-wrap: wrap; }
+.text-button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.item-card[data-read="true"] h2 { color: var(--text-muted); font-weight: 500; }
+.original-message-view { margin: 10px; }
+.original-message-view .search-field { margin-top: 10px; }
+.original-message-view .original-text { margin-top: 10px; max-height: 60vh; }
+mark { background: var(--soon-soft); color: var(--text); }
+mark[data-active="true"] { outline: 2px solid var(--accent); }
+
+#paste-panel label { display: block; margin-top: 12px; margin-bottom: 5px; font-size: 12px; }
+#paste-panel input, #paste-panel textarea { width: 100%; padding: 8px; border: 1px solid var(--border-strong); border-radius: 4px; color: var(--text); background: var(--surface); font: inherit; font-size: 12px; }
+#paste-panel textarea { resize: vertical; min-height: 120px; }
+
+.sync-status { margin: 10px 14px; color: var(--text-muted); font-size: 11px; line-height: 1.5; }

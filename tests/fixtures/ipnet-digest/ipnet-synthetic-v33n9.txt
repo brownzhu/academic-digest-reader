@@ -1,0 +1,93 @@
+IPNet Digest           Volume 33, Number 9       7 October 2026
+
+Today's Editor:         Alex Example                     Example University
+
+Today's Topics:
+
+University Assistant, Example University
+
+Applied Mathematics Congress, 12–16 July 2027
+
+Call for Abstracts, Annual Imaging Meeting
+
+The classic book on optimization is now free to download
+
+Table of Contents (Example Journal)
+
+Submissions for IPNet Digest: submit@example.org
+
+Information about IPNet: https://example.org/ipnet
+
+………………………………………………………
+
+From: Alice Example, alice@example.org
+
+Date: Monday 5 October 2026
+
+Subject:  Conference advertising on IPNET
+
+Dear Colleagues,
+
+The workshop "Inverse Imaging Meeting" will take place from January 18 to 20, 2027.
+For information visit https://example.org/imaging.
+Participation is free, but registration is required (deadline: November 30, 2026).
+
+………………………………………………………
+
+From : Example, Blair <blair@example.org>
+
+Date: Sunday, 27 September, 2026
+
+Subject : Applied Mathematics Congress, 12–16 July 2027
+
+The conference will take place from 12–16 July 2027.
+https://example.org/congress
+IMPORTANT DATES
+Abstract submission deadline : 7 December 2026
+Minisymposium proposal deadline : 7 December 2026
+Grant application deadline: 7 December 2026
+Early-bird registration deadline: 9 February 2027
+Regular registration deadline: 14 June 2027
+
+………………………………………………………
+
+From: Casey Example <casey@example.org>
+
+Date : Friday 2 October 2026
+
+Subject: Call for Abstracts, Annual Imaging Meeting
+
+The annual meeting will be held March 8-12, 2027.
+Research includes inverse problems and imaging.
+Deadline of abstract submission: December 1, 2026
+Closure of early online registration (Early fee): January 19, 2027
+Closure of online registration: March 5, 2027
+https://example.org/annual
+
+………………………………………………………
+
+From: Drew Example <drew@example.org>
+
+Date: Thursday, 24 September, 2026
+
+Subject: The classic book on optimization is now free to download
+
+This book is available at https://example.org/book.
+
+………………………………………………………
+
+From : Ellis Example ellis@example.org
+
+Date: Monday, 14 September, 2026
+
+Subject : IPNet Digest table of contents submission
+
+A synthetic paper on inverse imaging
+Avery Example and Robin Example
+
+A synthetic paper on stable reconstruction
+Morgan Example
+
+Example Journal of Inverse Problems
+
+::::::::::::::::::::::::::::::end:::::::::::::::::::::::::::::::::::::::

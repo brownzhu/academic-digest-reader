@@ -118,4 +118,14 @@ describe("Gmail DOM extraction", () => {
     expect(digest.items).toHaveLength(17);
     expect(digest.warnings).toEqual([]);
   });
+
+  it("reports Gmail clipping independently of newsletter format", () => {
+    const body = mountMessage("An unfamiliar newsletter with enough text to be extracted locally.");
+    const entire = document.createElement("a");
+    entire.href = "https://mail.google.com/mail/u/0?view=lg&permmsgid=synthetic";
+    entire.textContent = "查看邮件全文";
+    body.parentElement!.append(entire);
+    expect(extractCurrentGmailMessage().extractionWarnings.join(" ")).toContain("clipped");
+  });
+
 });

@@ -4,7 +4,7 @@ export interface ExtractedLink {
 }
 
 export interface ExtractedMessage {
-  source: "gmail-dom";
+  source: "gmail-dom" | "pasted-text";
   sourceUrl: string;
   subject: string | null;
   sender: string | null;

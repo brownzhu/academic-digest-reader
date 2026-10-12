@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Academic Digest Reader",
-  "version": "0.2.2",
+  "version": "0.6.0",
   "description": "Local, deterministic parsing of structured academic digest emails.",
   "minimum_chrome_version": "116",
   "permissions": ["activeTab", "scripting", "sidePanel", "storage"],

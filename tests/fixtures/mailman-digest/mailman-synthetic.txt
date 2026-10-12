@@ -1,0 +1,54 @@
+Send Example Research mailing list submissions to list@example.org.
+
+Today's Topics:
+
+   1. Workshop on inverse imaging (Alice Example)
+   2. Postdoc in numerical analysis (Blair Example)
+   3. New book on reconstruction (Casey Example)
+
+----------------------------------------------------------------------
+
+Message: 1
+Date: Wed, 7 Oct 2026 12:30:00 +0200
+From: Alice Example <alice@example.org>
+To: list@example.org
+Subject: Workshop on inverse imaging
+Message-ID: <synthetic-1@example.org>
+
+The workshop will take place January 18-20, 2027.
+Registration deadline: November 30, 2026.
+Workshop website
+
+------------------------------
+
+Message: 2
+Subject: Postdoc in numerical
+ analysis
+From: Blair Example
+ <blair@example.org>
+Date: 7 Oct 2026 09:00:00 +0000
+
+Institution: Example University, Example City
+Applications close on December 15, 2026.
+Read more
+
+------------------------------
+
+Message: 3
+From: Casey Example <casey@example.org>
+Subject: New book on reconstruction
+
+A new book about inverse problems and optimization.
+Read more
+
+------------------------------
+
+Subject: Digest Footer
+
+Example Research mailing list -- list@example.org
+To unsubscribe send email to leave@example.org.
+
+------------------------------
+
+End of Example Research Digest, Vol 4, Issue 12
+*********************************************

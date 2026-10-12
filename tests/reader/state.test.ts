@@ -69,3 +69,31 @@ describe("deadline display", () => {
     expect(deadlineStatus("2027-04-30", now).state).toBe("normal");
   });
 });
+
+describe("reading workflow filters", () => {
+  it("combines saved/unread state with search and category", () => {
+    const postdoc = digest.items.find(item => item.category === "Postdoc")!;
+    const flags = (item: typeof postdoc) => ({ saved: item === postdoc, read: item === postdoc });
+    expect(selectItems(digest.items, state({ workflow: "saved", filter: "Postdoc" }), flags)).toEqual([postdoc]);
+    expect(selectItems(digest.items, state({ workflow: "saved", query: "nonexistent-word" }), flags)).toEqual([]);
+    expect(selectItems(digest.items, state({ workflow: "unread" }), flags)).toHaveLength(16);
+  });
+  it("finds a future registration deadline even after the primary deadline expires", () => {
+    const source = digest.items.find(item => item.deadline)!;
+    const deadline = source.deadline!;
+    const item = { ...source, deadline: { ...deadline, iso: "2026-10-01" }, dates: [
+      { ...deadline, iso: "2026-10-01" },
+      { ...deadline, iso: "2026-10-30", kind: "registration-deadline" as const },
+    ] };
+    const now = new Date(2026, 9, 7);
+    expect(selectItems([item], state({ workflow: "due" }), undefined, now)).toEqual([item]);
+    expect(selectItems([{ ...item, dates: [] }], state({ workflow: "due" }), undefined, now)).toEqual([]);
+  });
+  it("includes today and day 30, excludes expired and day 31", () => {
+    const source = digest.items.find(item => item.deadline)!;
+    const items = ["2026-10-06", "2026-10-07", "2026-11-06", "2026-11-07"].map(iso => ({
+      ...source, deadline: { ...source.deadline!, iso }, dates: [],
+    }));
+    expect(selectItems(items, state({ workflow: "due", sort: "deadline" }), undefined, new Date(2026, 9, 7))).toEqual(items.slice(1, 3));
+  });
+});

@@ -2,7 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import { PROJECT_ROOT } from "../helpers";
 
 beforeAll(async () => {
@@ -47,7 +47,7 @@ describe("Side Panel startup", () => {
     expect(relevant.getAttribute("aria-pressed")).toBe("true");
 
     document.querySelector<HTMLButtonElement>("button[data-filter='all']")!.click();
-    const expand = document.querySelector<HTMLButtonElement>(".text-button")!;
+    const expand = document.querySelector<HTMLButtonElement>(".item-card .text-button")!;
     const detailsId = expand.getAttribute("aria-controls")!;
     expand.click();
     expect(document.getElementById(detailsId)?.hidden).toBe(false);
@@ -56,8 +56,63 @@ describe("Side Panel startup", () => {
     const theme = document.getElementById("theme-select") as HTMLSelectElement;
     theme.value = "dark";
     theme.dispatchEvent(new Event("change"));
-    await Promise.resolve();
-    expect(document.documentElement.dataset.theme).toBe("dark");
+    await vi.waitFor(() => expect(document.documentElement.dataset.theme).toBe("dark"));
     expect(localStorage.getItem("displayMode")).toBe("dark");
   });
+
+  it("saves and marks read, combines workflow filters and preserves expanded content", async () => {
+    document.getElementById("reset-filters")?.click();
+    const first = document.querySelector(".item-card")!;
+    const title = first.querySelector("h2")?.textContent;
+    if (first.querySelector<HTMLElement>(".expanded-content")!.hidden) first.querySelector<HTMLButtonElement>(".text-button")!.click();
+    first.querySelector<HTMLButtonElement>(".flag-saved")!.click();
+    await vi.waitFor(() => expect(document.querySelector(".flag-saved")?.getAttribute("aria-pressed")).toBe("true"));
+    expect(document.querySelector<HTMLElement>(".expanded-content")?.hidden).toBe(false);
+    const workflow = document.getElementById("workflow-select") as HTMLSelectElement;
+    workflow.value = "saved";
+    workflow.dispatchEvent(new Event("change"));
+    expect(document.querySelectorAll(".item-card")).toHaveLength(1);
+    expect(document.querySelector(".item-card h2")?.textContent).toBe(title);
+    document.querySelector<HTMLButtonElement>(".flag-read")!.click();
+    await vi.waitFor(() => expect(document.querySelector(".flag-read")?.getAttribute("aria-pressed")).toBe("true"));
+    workflow.value = "unread";
+    workflow.dispatchEvent(new Event("change"));
+    expect(document.querySelectorAll(".item-card")).toHaveLength(16);
+    document.getElementById("reset-filters")?.click();
+    expect(document.querySelectorAll(".item-card")).toHaveLength(17);
+  });
+
+
+  it("reads pasted newsletters, rejects empty input and searches unknown text safely", async () => {
+    document.getElementById("paste-toggle")?.click();
+    document.getElementById("paste-read")?.click();
+    expect(document.getElementById("paste-error")?.hidden).toBe(false);
+    const body = document.getElementById("paste-body") as HTMLTextAreaElement;
+    body.value = readFileSync(resolve(PROJECT_ROOT, "tests/fixtures/mailman-digest/mailman-synthetic.txt"), "utf8");
+    document.getElementById("paste-read")?.click();
+    expect(document.getElementById("source-label")?.textContent).toBe("Pasted newsletter");
+    expect(document.querySelectorAll(".item-card")).toHaveLength(3);
+    expect(body.value).toBe("");
+    expect(document.getElementById("paste-panel")?.hidden).toBe(true);
+
+    document.getElementById("paste-toggle")?.click();
+    body.value = "中文资讯\n逆问题与优化\n另一条逆问题资讯 <script>bad()</script>";
+    document.getElementById("paste-read")?.click();
+    const original = document.getElementById("original-message-view")!;
+    expect(original.hidden).toBe(false);
+    expect(original.querySelector("script")).toBeNull();
+    expect(document.getElementById("retry-button")?.hidden).toBe(true);
+    const search = original.querySelector<HTMLInputElement>("input[type=search]")!;
+    search.value = "逆问题";
+    search.dispatchEvent(new Event("input"));
+    expect(original.querySelectorAll("mark")).toHaveLength(2);
+    const next = [...original.querySelectorAll<HTMLButtonElement>("button")].find(button => button.textContent === "Next")!;
+    next.click();
+    expect(original.textContent).toContain("2 of 2 matches");
+    search.value = "absent";
+    search.dispatchEvent(new Event("input"));
+    expect(next.disabled).toBe(true);
+    expect(original.textContent).toContain("No matches");
+  });
+
 });

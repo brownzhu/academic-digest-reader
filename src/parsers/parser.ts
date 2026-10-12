@@ -3,6 +3,7 @@ import type { Digest } from "../domain/digest";
 export interface ParserMetadata {
   originalSubject?: string | null;
   source?: string;
+  links?: readonly { text: string; url: string }[];
 }
 
 export interface ParserProbe {

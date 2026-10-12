@@ -47,7 +47,7 @@ export const CATEGORY_RULES: readonly CategoryRule[] = [
   {
     id: "category.journal-issue",
     category: "Journal / New Issue",
-    patterns: [/\bcontents?,\s+.*(?:volume|issue)\b/i, /\bnew (?:volume|issue)\b/i],
+    patterns: [/\btable of contents\b/i, /\bcontents?,\s+.*(?:volume|issue)\b/i, /\bnew (?:volume|issue)\b/i],
   },
   {
     id: "category.software",

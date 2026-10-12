@@ -1,11 +1,18 @@
+import { FLAGS_PREFIX, hasChromeSync, isReadingFlags, isTheme, observeReadingData, readingStorageNotice } from "./reading-storage";
+import { EMPTY_FLAGS, itemFlagKey, loadItemFlags, saveItemFlags, type ItemFlagMap } from "./item-flags";
+import { extractUrls } from "../extractors/urls";
+import { highlightText } from "./text-search";
 import digestJson from "../../artifacts/na-digest-synthetic.normalized.json";
 import type { Digest } from "../domain/digest";
 import type { DigestItem, ExtractedDate } from "../domain/item";
-import { NaDigestParser } from "../parsers/na-digest-parser";
+import { createParserRegistry } from "../parsers/supported-parsers";
+import type { ExtractedMessage } from "../extraction/types";
 import type { ExtractionResponse } from "../runtime/messages";
 import { applyDisplayMode, loadDisplayMode, saveDisplayMode } from "./settings";
 import {
   deadlineStatus,
+  nextDeadline,
+  type WorkflowFilter,
   selectItems,
   type DisplayMode,
   type FilterValue,
@@ -16,7 +23,10 @@ import {
 const fixtureDigest = digestJson as unknown as Digest;
 const GMAIL_ORIGIN_PATTERN = "https://mail.google.com/*";
 let currentDigest = fixtureDigest;
-const parser = new NaDigestParser();
+const parser = createParserRegistry();
+let itemFlags: ItemFlagMap = {};
+let flagStorageAvailable = true;
+const expandedItems = new Set<string>();
 const state: ReaderState = { query: "", filter: "all", sort: "original" };
 
 function requiredElement<T extends HTMLElement>(id: string): T {
@@ -25,6 +35,9 @@ function requiredElement<T extends HTMLElement>(id: string): T {
   return node as T;
 }
 
+const workflowSelect = requiredElement<HTMLSelectElement>("workflow-select");
+const feedback = requiredElement<HTMLElement>("action-feedback");
+const originalView = requiredElement<HTMLElement>("original-message-view");
 const list = requiredElement<HTMLElement>("item-list");
 const emptyState = requiredElement<HTMLElement>("empty-state");
 const resultCount = requiredElement<HTMLElement>("result-count");
@@ -94,7 +107,7 @@ function addFact(container: HTMLElement, label: string, value: string, className
 function createExpandedContent(item: DigestItem): HTMLElement {
   const expanded = node("section", "expanded-content");
   expanded.id = `details-${item.id}`;
-  expanded.hidden = true;
+  expanded.hidden = !expandedItems.has(itemFlagKey(currentDigest, item));
 
   const details = node("dl", "metadata-list");
   const metadata: Array<[string, string | null]> = [
@@ -161,6 +174,9 @@ function createExpandedContent(item: DigestItem): HTMLElement {
 function createCard(item: DigestItem): HTMLElement {
   const article = node("article", "item-card");
   article.dataset.category = item.category;
+  const flagKey = itemFlagKey(currentDigest, item);
+  const flags = itemFlags[flagKey] ?? EMPTY_FLAGS;
+  article.dataset.read = String(flags.read);
 
   const heading = node("div", "card-heading");
   const titleBlock = node("div");
@@ -175,12 +191,13 @@ function createCard(item: DigestItem): HTMLElement {
   }
 
   const facts = node("div", "fact-grid");
-  if (item.deadline) {
-    const status = deadlineStatus(item.deadline.iso);
+  const displayedDeadline = state.workflow === "due" ? nextDeadline(item) : item.deadline;
+  if (displayedDeadline) {
+    const status = deadlineStatus(displayedDeadline.iso);
     const deadlineFact = node("div", `fact deadline deadline-${status.state}`);
     deadlineFact.append(
-      node("span", "fact-label", DATE_LABELS[item.deadline.kind]),
-      node("strong", "fact-value", formatDate(item.deadline.iso)),
+      node("span", "fact-label", DATE_LABELS[displayedDeadline.kind]),
+      node("strong", "fact-value", formatDate(displayedDeadline.iso)),
       node("span", "deadline-status", status.label),
     );
     facts.append(deadlineFact);
@@ -200,17 +217,45 @@ function createCard(item: DigestItem): HTMLElement {
 
   const expanded = createExpandedContent(item);
   const actions = node("div", "card-actions");
-  const expandButton = node("button", "text-button", "Expand");
+  const expandButton = node("button", "text-button", expanded.hidden ? "Expand" : "Collapse");
   expandButton.type = "button";
   expandButton.setAttribute("aria-controls", expanded.id);
-  expandButton.setAttribute("aria-expanded", "false");
+  expandButton.setAttribute("aria-expanded", String(!expanded.hidden));
   expandButton.addEventListener("click", () => {
     const willOpen = expanded.hidden;
     expanded.hidden = !willOpen;
+    if (willOpen) expandedItems.add(flagKey); else expandedItems.delete(flagKey);
     expandButton.textContent = willOpen ? "Collapse" : "Expand";
     expandButton.setAttribute("aria-expanded", String(willOpen));
   });
   actions.append(expandButton);
+
+  for (const field of ["saved", "read"] as const) {
+    const labels = field === "saved" ? ["Save", "Saved"] : ["Mark read", "Mark unread"];
+    const button = node("button", `text-button flag-${field}`, labels[flags[field] ? 1 : 0]);
+    button.type = "button";
+    button.setAttribute("aria-pressed", String(flags[field]));
+    button.disabled = !flagStorageAvailable;
+    button.addEventListener("click", async () => {
+      // Keep the other control disabled until persistence completes, so a rapid
+      // second click cannot overwrite a just-saved flag with stale state.
+      const flagButtons = actions.querySelectorAll<HTMLButtonElement>(".flag-saved, .flag-read");
+      flagButtons.forEach(control => { control.disabled = true; });
+      const updated = { ...(itemFlags[flagKey] ?? EMPTY_FLAGS), [field]: !(itemFlags[flagKey] ?? EMPTY_FLAGS)[field] };
+      try {
+        await saveItemFlags(flagKey, updated);
+        itemFlags[flagKey] = updated;
+        feedback.hidden = true;
+        render();
+      } catch {
+        feedback.textContent = hasChromeSync() ? "Could not save to Chrome Sync storage. The previous mark is unchanged. Check storage limits or try again." : "Could not save the reading mark on this device. Please try again.";
+        feedback.hidden = false;
+        flagButtons.forEach(control => { control.disabled = false; });
+      }
+    });
+    actions.append(button);
+  }
+
 
   const primaryUrl = item.urls[0]?.url;
   if (primaryUrl) {
@@ -226,10 +271,11 @@ function createCard(item: DigestItem): HTMLElement {
 }
 
 function render(): void {
-  const selected = selectItems(currentDigest.items, state);
+  const selected = selectItems(currentDigest.items, state, item => itemFlags[itemFlagKey(currentDigest, item)] ?? EMPTY_FLAGS);
   list.replaceChildren(...selected.map(createCard));
   resultCount.textContent = `${selected.length} of ${currentDigest.items.length} items`;
   emptyState.hidden = selected.length > 0;
+  emptyState.textContent = state.workflow === "due" ? "No matching deadlines in the next 30 days." : state.workflow === "saved" ? "No saved announcements match in this email." : "No announcements match the current filters.";
 }
 
 function renderOverview(digest: Digest, notices: readonly string[] = []): void {
@@ -239,7 +285,7 @@ function renderOverview(digest: Digest, notices: readonly string[] = []): void {
   );
   overviewDeadlines.textContent = String(
     digest.items.filter(
-      (item) => item.deadline && deadlineStatus(item.deadline.iso).daysRemaining >= 0,
+      (item) => nextDeadline(item) !== null,
     ).length,
   );
   const uniqueNotices = [...new Set([...digest.warnings, ...notices])];
@@ -265,6 +311,8 @@ function resetReaderControls(): void {
   state.query = "";
   state.filter = "all";
   state.sort = "original";
+  state.workflow = "all";
+  workflowSelect.value = "all";
   searchInput.value = "";
   sortSelect.value = "original";
   for (const candidate of filterStrip.querySelectorAll<HTMLButtonElement>("button[data-filter]")) {
@@ -273,6 +321,8 @@ function resetReaderControls(): void {
 }
 
 function showReader(): void {
+  originalView.hidden = true;
+  originalView.replaceChildren();
   statusPanel.hidden = true;
   statusPanel.removeAttribute("aria-busy");
   digestOverview.hidden = false;
@@ -286,6 +336,9 @@ function showStatus(
   diagnostics: readonly string[] = [],
   loading = false,
 ): void {
+  originalView.hidden = true;
+  originalView.replaceChildren();
+  retryButton.hidden = false;
   statusPanel.hidden = false;
   statusPanel.dataset.state = loading ? "loading" : "error";
   statusPanel.setAttribute("aria-busy", String(loading));
@@ -300,6 +353,65 @@ function showStatus(
   readerControls.hidden = true;
   list.hidden = true;
   emptyState.hidden = true;
+}
+
+function showOriginalMessage(message: ExtractedMessage): void {
+  statusPanel.dataset.state = "original";
+  retryButton.hidden = message.source === "pasted-text";
+  requiredElement("source-label").textContent = message.source === "pasted-text" ? "Pasted newsletter" : "Current Gmail message";
+  requiredElement("newsletter-name").textContent = message.subject ?? "Opened message";
+  requiredElement("stage-note").textContent = "Original message · announcement parsing unavailable · content stays local";
+  for (const warning of message.extractionWarnings) originalView.append(node("p", "diagnostic-warning", warning));
+  originalView.append(node("h2", undefined, "Original message"));
+  const searchLabel = node("label", "search-field");
+  const search = node("input");
+  search.type = "search";
+  search.placeholder = "Find in this message…";
+  search.setAttribute("aria-label", "Find in original message");
+  searchLabel.append(search);
+  const searchActions = node("div", "card-actions");
+  const matchCount = node("span", "storage-note", "Enter text to find matches");
+  matchCount.setAttribute("aria-live", "polite");
+  const previous = node("button", "text-button", "Previous");
+  const next = node("button", "text-button", "Next");
+  previous.type = next.type = "button";
+  previous.disabled = next.disabled = true;
+  const originalText = node("pre", "original-text", message.plainText);
+  let matches: HTMLElement[] = [];
+  let active = -1;
+  function selectMatch(direction: number): void {
+    if (!matches.length) return;
+    matches[active]?.removeAttribute("data-active");
+    active = (active + direction + matches.length) % matches.length;
+    matches[active]!.dataset.active = "true";
+    matches[active]!.scrollIntoView?.({ block: "nearest" });
+    matchCount.textContent = `${active + 1} of ${matches.length}${matches.length === 1000 ? "+" : ""} matches`;
+  }
+  search.addEventListener("input", () => {
+    matches = highlightText(originalText, message.plainText, search.value);
+    active = -1;
+    previous.disabled = next.disabled = matches.length === 0;
+    matchCount.textContent = search.value.trim() ? "No matches" : "Enter text to find matches";
+    if (matches.length) selectMatch(1);
+  });
+  previous.addEventListener("click", () => selectMatch(-1));
+  next.addEventListener("click", () => selectMatch(1));
+  searchActions.append(previous, next, matchCount);
+  originalView.append(searchLabel, searchActions, originalText);
+  const links = node("ul", "link-list");
+  for (const link of message.links) {
+    try { if (!["http:", "https:"].includes(new URL(link.url).protocol)) continue; }
+    catch { continue; }
+    const anchor = node("a", undefined, link.text || link.url);
+    anchor.href = link.url;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    const li = node("li");
+    li.append(anchor);
+    links.append(li);
+  }
+  if (links.children.length) originalView.append(node("h2", undefined, "Message links"), links);
+  originalView.hidden = false;
 }
 
 function useFixturePreview(): void {
@@ -379,6 +491,9 @@ async function loadCurrentGmailMessage(): Promise<void> {
 
   refreshButton.disabled = true;
   refreshButton.textContent = "Reading…";
+  requiredElement("newsletter-name").textContent = "Academic Digest Reader";
+  requiredElement("issue-meta").textContent = "";
+  requiredElement("stage-note").textContent = "";
   showStatus("Reading current Gmail message…", "Email content remains local in this browser.", [], true);
   let response: ExtractionResponse;
   try {
@@ -406,16 +521,21 @@ async function loadCurrentGmailMessage(): Promise<void> {
     return;
   }
 
-  const extracted = response.message;
+  presentMessage(response.message);
+}
+
+function presentMessage(extracted: ExtractedMessage): void {
+  requiredElement("issue-meta").textContent = "";
   try {
     currentDigest = parser.parse(extracted.plainText, {
       originalSubject: extracted.subject,
       source: extracted.source,
+      links: extracted.links,
     });
   } catch (error) {
     showStatus(
-      "Could not parse this message",
-      "The Gmail body was extracted, but it did not match the supported NA Digest structure.",
+      "Original message view",
+      "This format could not be split reliably into announcements. The full extracted message is shown below; no announcement fields have been inferred.",
       [
         error instanceof Error ? error.message : String(error),
         ...extracted.extractionWarnings,
@@ -425,15 +545,16 @@ async function loadCurrentGmailMessage(): Promise<void> {
         `Raw preview:\n${extracted.plainText.slice(0, 1200)}`,
       ],
     );
+    showOriginalMessage(extracted);
     refreshButton.disabled = false;
-    refreshButton.textContent = "Read current email";
+    refreshButton.textContent = "Refresh email";
     return;
   }
 
   resetReaderControls();
   initializeHeader(
     currentDigest,
-    "Current Gmail message",
+    extracted.source === "pasted-text" ? "Pasted newsletter" : "Current Gmail message",
     `${currentDigest.items.length} announcements · Parsed locally from ${extracted.subject ?? "opened message"}`,
   );
   renderOverview(currentDigest, extracted.extractionWarnings);
@@ -443,10 +564,53 @@ async function loadCurrentGmailMessage(): Promise<void> {
   refreshButton.textContent = "Refresh email";
 }
 
+const pastePanel = requiredElement<HTMLElement>("paste-panel");
+const pasteToggle = requiredElement<HTMLButtonElement>("paste-toggle");
+const pasteSubject = requiredElement<HTMLInputElement>("paste-subject");
+const pasteBody = requiredElement<HTMLTextAreaElement>("paste-body");
+const pasteError = requiredElement<HTMLElement>("paste-error");
+function closePastePanel(): void {
+  pastePanel.hidden = true;
+  pasteToggle.setAttribute("aria-expanded", "false");
+  pasteSubject.value = pasteBody.value = "";
+  pasteError.hidden = true;
+}
+pasteToggle.addEventListener("click", () => {
+  if (!pastePanel.hidden) { closePastePanel(); return; }
+  pastePanel.hidden = false;
+  pasteToggle.setAttribute("aria-expanded", "true");
+  pasteBody.focus();
+});
+requiredElement("paste-cancel").addEventListener("click", closePastePanel);
+requiredElement("paste-read").addEventListener("click", () => {
+  const text = pasteBody.value.trim();
+  if (!text || text.length > 1_000_000) {
+    pasteError.textContent = text ? "Please paste less than 1 million characters at a time." : "Paste a message body first.";
+    pasteError.hidden = false;
+    return;
+  }
+  const subject = pasteSubject.value.trim() || null;
+  closePastePanel();
+  presentMessage({
+    source: "pasted-text", sourceUrl: "", subject,
+    sender: null, senderEmail: null, receivedDateText: null, plainText: text,
+    links: extractUrls(text).map(link => ({ text: link.url, url: link.url })),
+    extractionWarnings: [], extractionConfidence: 1,
+    diagnostics: { selector: "manual-paste", visibleCandidateCount: 1, selectedTextLength: text.length, usedCandidateScoring: false },
+  });
+});
+
 searchInput.addEventListener("input", () => {
   state.query = searchInput.value;
   render();
 });
+
+workflowSelect.addEventListener("change", () => {
+  state.workflow = workflowSelect.value as WorkflowFilter;
+  if (state.workflow === "due") { state.sort = "deadline"; sortSelect.value = "deadline"; }
+  render();
+});
+requiredElement("reset-filters").addEventListener("click", () => { resetReaderControls(); render(); });
 
 sortSelect.addEventListener("change", () => {
   state.sort = sortSelect.value as SortMode;
@@ -463,10 +627,19 @@ filterStrip.addEventListener("click", (event) => {
   render();
 });
 
-themeSelect.addEventListener("change", () => {
+themeSelect.addEventListener("change", async () => {
   const mode = themeSelect.value as DisplayMode;
-  applyDisplayMode(mode);
-  void saveDisplayMode(mode);
+  const previous = document.documentElement.dataset.theme as DisplayMode;
+  themeSelect.disabled = true;
+  try {
+    await saveDisplayMode(mode);
+    applyDisplayMode(mode);
+    feedback.hidden = true;
+  } catch {
+    themeSelect.value = previous;
+    feedback.textContent = "Could not save the theme. Your previous setting is unchanged; please try again.";
+    feedback.hidden = false;
+  } finally { themeSelect.disabled = false; }
 });
 
 refreshButton.addEventListener("click", () => {
@@ -479,7 +652,36 @@ retryButton.addEventListener("click", () => {
 
 fixtureButton.addEventListener("click", useFixturePreview);
 
-const initialTheme = await loadDisplayMode();
+try { itemFlags = await loadItemFlags(); }
+catch {
+  flagStorageAvailable = false;
+  feedback.textContent = "Reading marks could not be loaded or migrated. Existing data is preserved. Reopen the reader to retry; mark controls are disabled.";
+  feedback.hidden = false;
+}
+requiredElement("sync-status").textContent = readingStorageNotice();
+let initialTheme: DisplayMode = "system";
+try { initialTheme = await loadDisplayMode(); }
+catch {
+  feedback.textContent = "Reading settings could not be loaded or migrated. Existing data is preserved. Reopen the reader to retry.";
+  feedback.hidden = false;
+}
+observeReadingData(changes => {
+  let flagsChanged = false;
+  for (const [key, change] of Object.entries(changes)) {
+    if (key.startsWith(FLAGS_PREFIX)) {
+      if (isReadingFlags(change.newValue)) itemFlags[key] = { saved: change.newValue.saved, read: change.newValue.read };
+      else if (change.newValue === undefined) delete itemFlags[key];
+      else continue;
+      flagsChanged = true;
+    }
+    if (key === "displayMode" && (isTheme(change.newValue) || change.newValue === undefined)) {
+      const mode = change.newValue ?? "system";
+      themeSelect.value = mode;
+      applyDisplayMode(mode);
+    }
+  }
+  if (flagsChanged && !list.hidden) render();
+});
 themeSelect.value = initialTheme;
 applyDisplayMode(initialTheme);
 refreshButton.hidden = !extensionRuntime;

@@ -1,0 +1,7 @@
+{
+  "newsletterName": "Example Research Digest",
+  "volume": "4",
+  "issue": "12",
+  "titles": ["Workshop on inverse imaging", "Postdoc in numerical analysis", "New book on reconstruction"],
+  "categories": ["Workshop", "Postdoc", "Book"]
+}

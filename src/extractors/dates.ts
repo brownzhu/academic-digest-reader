@@ -57,7 +57,7 @@ function monthNumber(raw: string): number | null {
 }
 
 export function parseEnglishDate(raw: string): string | null {
-  const normalized = raw.trim().replace(/\s+/g, " ");
+  const normalized = raw.trim().replace(/\s+/g, " ").replace(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tue|Wed|Thu|Fri|Sat|Sun)\b\s*,?\s*/i, "");
   const monthFirst = normalized.match(
     new RegExp(`^(${MONTH_PATTERN})\\.?\\s+(\\d{1,2}),?\\s+(\\d{4})$`, "i"),
   );
@@ -217,7 +217,11 @@ export function extractDates(text: string, title: string): ExtractedDate[] {
   return candidates.map((candidate, index) => {
     const [left, right] = sentenceBounds(text, candidate.start, candidate.end);
     const context = text.slice(left, right);
-    const beforeDate = text.slice(left, candidate.start);
+    // A previous date ends its own label's scope, even in punctuation-free
+    // lists. Keep hard-wrapped context when there is no intervening date.
+    const previous = candidates[index - 1];
+    const labelStart = previous && previous.end <= candidate.start ? Math.max(left, previous.end) : left;
+    const beforeDate = text.slice(labelStart, candidate.start);
     const deadlineKind = inferDeadlineKind(beforeDate, title);
     let kind: DateKind = deadlineKind ?? "unknown";
     if (!deadlineKind && /\bapplications?.*\bopen\s+on\s*$/i.test(beforeDate)) {
@@ -247,7 +251,10 @@ export function extractDates(text: string, title: string): ExtractedDate[] {
 }
 
 export function extractMessageDate(raw: string, sourceOffset: number): ExtractedDate | null {
-  const iso = parseEnglishDate(raw);
+  // RFC email Date headers include a time and zone. Preserve the written
+  // calendar date; do not convert it across time zones or accept numeric dates.
+  const dateOnly = raw.replace(/\s+\d{1,2}:\d{2}(?::\d{2})?\s+(?:[+-]\d{4}|UT|UTC|GMT)(?:\s+\([^)]*\))?$/i, "");
+  const iso = parseEnglishDate(dateOnly);
   if (!iso) return null;
   return {
     raw,

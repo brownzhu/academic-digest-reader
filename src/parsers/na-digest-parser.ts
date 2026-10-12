@@ -1,19 +1,9 @@
-import { classifyItem } from "../classification/classify";
 import { evidence } from "../domain/evidence";
 import type { FieldEvidence } from "../domain/evidence";
 import type { Digest } from "../domain/digest";
-import type { DigestItem } from "../domain/item";
-import { extractCompensation } from "../extractors/compensation";
-import {
-  choosePrimaryDeadline,
-  extractDates,
-  extractMessageDate,
-  parseEnglishDate,
-} from "../extractors/dates";
-import { extractUrls } from "../extractors/urls";
-import { extractExplicitOrganizationAndLocation } from "../extractors/weak-fields";
-import { scoreRelevance } from "../relevance/score";
-import { normalizeText, stableHash } from "../utils/text";
+import { parseEnglishDate } from "../extractors/dates";
+import { normalizeText } from "../utils/text";
+import { buildItem, unambiguousLinks, type EntryHeader } from "./entry";
 import type { DigestParser, ParserMetadata, ParserProbe } from "./parser";
 import { DigestParseError } from "./parser";
 
@@ -27,18 +17,6 @@ const SEPARATOR_PATTERN = /^(?=[ \t-]{20,}$)(?:[ \t]*-){20,}[ \t-]*$/gm;
 interface Segment {
   text: string;
   start: number;
-}
-
-interface EntryHeader {
-  fromRaw: string;
-  fromOffset: number;
-  dateRaw: string;
-  dateOffset: number;
-  subject: string;
-  subjectSource: string;
-  subjectOffset: number;
-  body: string;
-  bodyOffset: number;
 }
 
 function splitSegments(text: string): Segment[] {
@@ -83,43 +61,6 @@ function parseEntryHeader(segment: Segment): EntryHeader | null {
     body,
     bodyOffset: bodyLocalOffset >= 0 ? segment.start + bodyLocalOffset : segment.start,
   };
-}
-
-function parseSender(fromRaw: string, offset: number): {
-  sender: string | null;
-  senderEmail: string | null;
-  evidence: FieldEvidence[];
-  warnings: string[];
-} {
-  const resultEvidence: FieldEvidence[] = [];
-  const warnings: string[] = [];
-  const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
-  const emailMatch = fromRaw.match(emailPattern);
-  const senderEmail = emailMatch?.[0] ?? null;
-  let sender: string | null = fromRaw;
-  if (senderEmail) {
-    sender = fromRaw
-      .replace(emailPattern, "")
-      .replace(/[<>]/g, "")
-      .replace(/\s+,/g, ",")
-      .replace(/[,;]\s*$/, "")
-      .trim();
-    resultEvidence.push(
-      evidence(
-        "senderEmail",
-        "header.from.email",
-        senderEmail,
-        offset + fromRaw.indexOf(senderEmail),
-      ),
-    );
-  } else if (/[©@]/.test(fromRaw)) {
-    warnings.push("From field resembles an email address but is not syntactically valid; senderEmail left null.");
-  }
-  sender = sender || fromRaw || null;
-  if (sender) {
-    resultEvidence.push(evidence("sender", "header.from.name", fromRaw, offset));
-  }
-  return { sender, senderEmail, evidence: resultEvidence, warnings };
 }
 
 function extractOriginalSubject(text: string, metadata?: ParserMetadata): string | null {
@@ -178,58 +119,6 @@ function reconcileTopics(topicLines: readonly string[], subjects: readonly strin
   return lineIndex === topicLines.length ? reconciled : [...topicLines];
 }
 
-function buildItem(header: EntryHeader, index: number, volume: string, issue: string): DigestItem {
-  const sender = parseSender(header.fromRaw, header.fromOffset);
-  const messageDate = extractMessageDate(header.dateRaw, header.dateOffset);
-  const classification = classifyItem(header.subject, header.body);
-  const dates = extractDates(header.body, header.subject);
-  const compensation = extractCompensation(header.body);
-  const weakFields = extractExplicitOrganizationAndLocation(header.body);
-  const urls = extractUrls(header.body);
-  const relevance = scoreRelevance(`${header.subject}\n${header.body}`);
-  const itemEvidence: FieldEvidence[] = [
-    evidence("title", "header.subject", header.subjectSource, header.subjectOffset),
-    classification.evidence,
-    ...sender.evidence,
-    ...(messageDate ? [messageDate.evidence] : []),
-    ...compensation.evidence,
-    ...weakFields.evidence,
-    evidence("originalBody", "segment.body", header.body, header.bodyOffset),
-  ];
-
-  const warnings = [...sender.warnings];
-  if (!messageDate) warnings.push(`Unrecognized message Date header: ${header.dateRaw}`);
-  const unknownDateCount = dates.filter(
-    (date) => date.kind === "unknown" && !date.evidence.ruleId.startsWith("date.deadline."),
-  ).length;
-  if (unknownDateCount > 0) {
-    warnings.push(`${unknownDateCount} date(s) retained without a reliable semantic type.`);
-  }
-
-  return {
-    id: `na-${volume}-${issue}-${index + 1}-${stableHash(header.subject.toLowerCase())}`,
-    originalIndex: index,
-    title: header.subject,
-    category: classification.category,
-    sender: sender.sender,
-    senderEmail: sender.senderEmail,
-    messageDate,
-    organization: weakFields.organization,
-    location: weakFields.location,
-    dates,
-    deadline: choosePrimaryDeadline(dates),
-    salary: compensation.salary,
-    funding: compensation.funding,
-    tags: relevance.matches.map((match) => match.keyword),
-    urls,
-    originalBody: header.body,
-    relevance,
-    evidence: itemEvidence,
-    extractionConfidence: Math.max(0, 1 - warnings.length * 0.05),
-    warnings,
-  };
-}
-
 export class NaDigestParser implements DigestParser {
   readonly id = "na-digest";
   readonly version = "0.2.0";
@@ -278,7 +167,7 @@ export class NaDigestParser implements DigestParser {
       throw new DigestParseError("No NA Digest entries with From/Date/Subject headers were found.");
     }
 
-    const items = entryHeaders.map((entry, index) => buildItem(entry, index, volume, issue));
+    const items = entryHeaders.map((entry, index) => buildItem(entry, index, volume, issue, "na", unambiguousLinks(normalized, metadata?.links)));
     const topics = reconcileTopics(
       topicLines,
       items.map((item) => item.title),

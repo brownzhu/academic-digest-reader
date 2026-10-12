@@ -1,4 +1,5 @@
-import type { DigestItem } from "../domain/item";
+import type { ItemFlags } from "./item-flags";
+import type { DigestItem, ExtractedDate } from "../domain/item";
 
 export type FilterValue =
   | "all"
@@ -14,10 +15,13 @@ export type FilterValue =
 export type SortMode = "original" | "relevance" | "deadline" | "date";
 export type DisplayMode = "system" | "light" | "dark";
 
+export type WorkflowFilter = "all" | "saved" | "unread" | "due";
+
 export interface ReaderState {
   query: string;
   filter: FilterValue;
   sort: SortMode;
+  workflow?: WorkflowFilter;
 }
 
 const PRIMARY_CATEGORIES = new Set([
@@ -65,10 +69,22 @@ function compareNullableDates(left: string | null, right: string | null): number
   return left.localeCompare(right);
 }
 
-export function selectItems(items: readonly DigestItem[], state: ReaderState): DigestItem[] {
+export function selectItems(
+  items: readonly DigestItem[], state: ReaderState,
+  flagsFor: (item: DigestItem) => ItemFlags = () => ({ saved: false, read: false }),
+  now = new Date(),
+): DigestItem[] {
   const query = state.query.trim().toLocaleLowerCase();
   const selected = items.filter(
-    (item) => matchesFilter(item, state.filter) && (!query || searchText(item).includes(query)),
+    (item) => {
+      const flags = flagsFor(item);
+      const due = nextDeadline(item, now);
+      const workflowMatches = !state.workflow || state.workflow === "all"
+        || (state.workflow === "saved" && flags.saved)
+        || (state.workflow === "unread" && !flags.read)
+        || (state.workflow === "due" && due !== null && deadlineStatus(due.iso, now).daysRemaining <= 30);
+      return workflowMatches && matchesFilter(item, state.filter) && (!query || searchText(item).includes(query));
+    },
   );
 
   return selected.sort((left, right) => {
@@ -77,7 +93,10 @@ export function selectItems(items: readonly DigestItem[], state: ReaderState): D
     }
     if (state.sort === "deadline") {
       return (
-        compareNullableDates(left.deadline?.iso ?? null, right.deadline?.iso ?? null) ||
+        compareNullableDates(
+          (state.workflow === "due" ? nextDeadline(left, now) : left.deadline)?.iso ?? null,
+          (state.workflow === "due" ? nextDeadline(right, now) : right.deadline)?.iso ?? null,
+        ) ||
         left.originalIndex - right.originalIndex
       );
     }
@@ -111,4 +130,11 @@ export function deadlineStatus(iso: string, now = new Date()): DeadlineStatus {
     return { label: `${daysRemaining} days remaining`, state: "soon", daysRemaining };
   }
   return { label: `${daysRemaining} days remaining`, state: "normal", daysRemaining };
+}
+
+/** Consider every explicit deadline, including registration after submissions close. */
+export function nextDeadline(item: DigestItem, now = new Date()): ExtractedDate | null {
+  return [...item.dates, ...(item.deadline ? [item.deadline] : [])]
+    .filter(date => date.kind.endsWith("-deadline") && deadlineStatus(date.iso, now).daysRemaining >= 0)
+    .sort((a, b) => a.iso.localeCompare(b.iso))[0] ?? null;
 }
